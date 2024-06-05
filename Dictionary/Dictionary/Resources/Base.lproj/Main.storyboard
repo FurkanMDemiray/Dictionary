@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
@@ -11,7 +11,7 @@
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="Dictionary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="HomeViewController" customModule="Dictionary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,28 +36,41 @@
                                     <constraint firstAttribute="height" constant="250" id="0JF-mZ-WFh"/>
                                 </constraints>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXe-ik-RVu">
+                                <rect key="frame" x="16" y="775" width="361" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Search"/>
+                                <connections>
+                                    <action selector="searchBtnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a05-JA-Zb7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="aKu-bU-0TI" firstAttribute="top" secondItem="sHG-qV-Ldi" secondAttribute="bottom" constant="8" id="HiX-tx-Wf4"/>
                             <constraint firstItem="sHG-qV-Ldi" firstAttribute="top" secondItem="dIH-pA-iLs" secondAttribute="bottom" constant="16" id="KFa-9e-Gxs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PXe-ik-RVu" secondAttribute="bottom" constant="8" id="NAZ-Uq-GSH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aKu-bU-0TI" secondAttribute="trailing" id="UK5-Cu-jkf"/>
                             <constraint firstItem="aKu-bU-0TI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WIH-cv-Ab6"/>
+                            <constraint firstItem="PXe-ik-RVu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Zfs-py-61I"/>
                             <constraint firstItem="sHG-qV-Ldi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="heA-ZD-Qew"/>
                             <constraint firstItem="dIH-pA-iLs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="mHx-n7-rjM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PXe-ik-RVu" secondAttribute="trailing" constant="16" id="phj-Y3-y9Y"/>
                             <constraint firstItem="dIH-pA-iLs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="quM-dV-rsy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dIH-pA-iLs" secondAttribute="trailing" constant="8" id="wgF-yB-JhS"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="x64-tr-emf"/>
                     <connections>
                         <outlet property="searchBar" destination="dIH-pA-iLs" id="1oZ-X4-fmV"/>
+                        <outlet property="searchButtonBottomConstraint" destination="NAZ-Uq-GSH" id="Vx0-xu-DCC"/>
                         <outlet property="tableView" destination="aKu-bU-0TI" id="Gsn-f2-h49"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
+            <point key="canvasLocation" x="1057.2519083969464" y="-34.507042253521128"/>
         </scene>
     </scenes>
     <resources>

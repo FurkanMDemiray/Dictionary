@@ -9,18 +9,29 @@ import Foundation
 
 protocol HomeInteractorProtocol {
     func fetchWord(word: String, completion: @escaping (Result<Word, Error>) -> Void)
+    func changeSearchButtonLocation()
 }
 
-protocol HomeInteractorOutputProtocol: AnyObject {
+protocol HomeInteractorOutputProtocol {
     func handleWordResult(_ result: Result<Word, Error>)
 }
 
-final class HomeInteractor: HomeInteractorProtocol {
+final class HomeInteractor {
 
     private let service: NetworkServiceProtocol
+    var presenter: HomeInteractorOutputProtocol!
+    var output: HomeInteractorOutputProtocol!
 
     init(service: NetworkServiceProtocol) {
         self.service = service
+    }
+
+}
+
+extension HomeInteractor: HomeInteractorProtocol {
+
+    func changeSearchButtonLocation() {
+
     }
 
     func fetchWord(word: String, completion: @escaping (Result<Word, Error>) -> Void) {
@@ -29,6 +40,7 @@ final class HomeInteractor: HomeInteractorProtocol {
             case .success(let words):
                 if let word = words.first {
                     completion(.success(word))
+                    print(word)
                 } else {
                     completion(.failure(NSError(domain: "No word found", code: 404, userInfo: nil)))
                 }
@@ -37,6 +49,7 @@ final class HomeInteractor: HomeInteractorProtocol {
             }
         }
     }
+
 }
 
 extension HomeInteractor: HomeInteractorOutputProtocol {
@@ -49,5 +62,3 @@ extension HomeInteractor: HomeInteractorOutputProtocol {
         }
     }
 }
-
-

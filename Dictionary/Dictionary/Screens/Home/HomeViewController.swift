@@ -10,20 +10,59 @@ import UIKit
 protocol HomeViewControllerProtocol: AnyObject {
     func updateView()
     func showError(error: Error)
-
+    func adjustSearchButton(forKeyboardHeight height: CGFloat)
 }
 
 final class HomeViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchButtonBottomConstraint: NSLayoutConstraint!
+
+    var presenter: HomePresenterProtocol!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        presenter.viewDidLoad()
+        setupUI()
+        setupKeyboardObservers()
     }
 
+    deinit {
+        removeKeyboardObservers()
+    }
 
+    private func setupUI() {
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+
+    private func setupKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    private func removeKeyboardObservers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.height
+            presenter.keyboardWillShow(withHeight: keyboardHeight)
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        presenter.keyboardWillHide()
+    }
+
+    @IBAction func searchBtnClicked(_ sender: Any) {
+        guard let word = searchBar.text else { return }
+        presenter.searchButtonTapped(word: word)
+    }
 }
 
 // MARK: - HomeViewControllerProtocol
@@ -38,15 +77,21 @@ extension HomeViewController: HomeViewControllerProtocol {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+
+    func adjustSearchButton(forKeyboardHeight height: CGFloat) {
+        searchButtonBottomConstraint.constant = height + 10 // Bir miktar boşluk ekleyebilirsiniz
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
 }
 
 // MARK: - UISearchBarDelegate
 extension HomeViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        //presenter?.searchButtonTapped(word: searchBar.text ?? "")
+        // Implement search logic if needed
     }
-
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate

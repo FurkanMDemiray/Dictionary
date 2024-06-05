@@ -140,6 +140,9 @@
 			isa = PBXGroup;
 			children = (
 				DD78E7412C10F41C003761FD /* Network */,
+				DD78E7072C10F118003761FD /* Main.storyboard */,
+				DD78E70C2C10F11A003761FD /* LaunchScreen.storyboard */,
+				DD78E70A2C10F11A003761FD /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -149,9 +152,6 @@
 			children = (
 				DD78E7012C10F118003761FD /* AppDelegate.swift */,
 				DD78E7032C10F118003761FD /* SceneDelegate.swift */,
-				DD78E7072C10F118003761FD /* Main.storyboard */,
-				DD78E70C2C10F11A003761FD /* LaunchScreen.storyboard */,
-				DD78E70A2C10F11A003761FD /* Assets.xcassets */,
 			);
 			path = App;
 			sourceTree = "<group>";
