@@ -23,10 +23,10 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         presenter.viewDidLoad()
         setupUI()
         setupKeyboardObservers()
+        hideKeyboardWhenTappedAround()
     }
 
     deinit {
@@ -48,6 +48,7 @@ final class HomeViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
+//MARK: - Actions
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             let keyboardHeight = keyboardFrame.height
@@ -79,7 +80,7 @@ extension HomeViewController: HomeViewControllerProtocol {
     }
 
     func adjustSearchButton(forKeyboardHeight height: CGFloat) {
-        searchButtonBottomConstraint.constant = height + 10 // Bir miktar boşluk ekleyebilirsiniz
+        searchButtonBottomConstraint.constant = height + 8
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }

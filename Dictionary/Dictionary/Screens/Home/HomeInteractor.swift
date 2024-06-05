@@ -9,7 +9,6 @@ import Foundation
 
 protocol HomeInteractorProtocol {
     func fetchWord(word: String, completion: @escaping (Result<Word, Error>) -> Void)
-    func changeSearchButtonLocation()
 }
 
 protocol HomeInteractorOutputProtocol {
@@ -29,10 +28,6 @@ final class HomeInteractor {
 }
 
 extension HomeInteractor: HomeInteractorProtocol {
-
-    func changeSearchButtonLocation() {
-
-    }
 
     func fetchWord(word: String, completion: @escaping (Result<Word, Error>) -> Void) {
         service.fetch(url: "https://api.dictionaryapi.dev/api/v2/entries/en/\(word)") { (result: Result<[Word], Error>) in
