@@ -23,8 +23,8 @@ protocol HomePresenterProtocol: AnyObject {
 final class HomePresenter {
 
     weak var view: HomeViewControllerProtocol!
-    var router: HomeRouterProtocol
     var interactor: HomeInteractorProtocol
+    var router: HomeRouterProtocol
 
     init(view: HomeViewControllerProtocol, router: HomeRouterProtocol, interactor: HomeInteractorProtocol) {
         self.view = view
@@ -99,10 +99,9 @@ extension HomePresenter: HomePresenterProtocol {
     func searchButtonTapped(word: String) {
         interactor.fetchWord(word: word) { [weak self] result in
             guard let self = self else { return }
-
             switch result {
             case .success(let word):
-                self.router.navigateToWordDetail(word: word)
+                self.router.navigateToWordDetail(.detail(source: word))
             case .failure(let error):
                 self.view.showError(error: error)
             }

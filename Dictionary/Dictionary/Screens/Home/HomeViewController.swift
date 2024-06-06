@@ -25,6 +25,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         presenter.viewDidLoad()
         setupFeatures()
+        title = "Dictionary"
     }
 
     deinit {
@@ -39,7 +40,6 @@ final class HomeViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.isScrollEnabled = false
         tableView.register(UINib(nibName: "RecentCell", bundle: nil), forCellReuseIdentifier: "RecentCell")
-
     }
 
     private func configureSearchBar() {

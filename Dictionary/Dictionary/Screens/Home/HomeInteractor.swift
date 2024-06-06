@@ -35,7 +35,6 @@ extension HomeInteractor: HomeInteractorProtocol {
             case .success(let words):
                 if let word = words.first {
                     completion(.success(word))
-                    print(word)
                 } else {
                     completion(.failure(NSError(domain: "No word found", code: 404, userInfo: nil)))
                 }

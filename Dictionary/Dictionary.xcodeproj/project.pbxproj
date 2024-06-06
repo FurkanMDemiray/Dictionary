@@ -26,6 +26,10 @@
 		DD78E74A2C11F6E3003761FD /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E7482C11F6E3003761FD /* RecentCell.swift */; };
 		DD78E74B2C11F6E3003761FD /* RecentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD78E7492C11F6E3003761FD /* RecentCell.xib */; };
 		DD78E74D2C120141003761FD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E74C2C120141003761FD /* Alert.swift */; };
+		DD78E74F2C1227AA003761FD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E74E2C1227AA003761FD /* DetailViewController.swift */; };
+		DD78E7512C1227BE003761FD /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E7502C1227BE003761FD /* DetailInteractor.swift */; };
+		DD78E7532C1227CB003761FD /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E7522C1227CB003761FD /* DetailPresenter.swift */; };
+		DD78E7552C1227DB003761FD /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E7542C1227DB003761FD /* DetailRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +72,10 @@
 		DD78E7482C11F6E3003761FD /* RecentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCell.swift; sourceTree = "<group>"; };
 		DD78E7492C11F6E3003761FD /* RecentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentCell.xib; sourceTree = "<group>"; };
 		DD78E74C2C120141003761FD /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		DD78E74E2C1227AA003761FD /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		DD78E7502C1227BE003761FD /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
+		DD78E7522C1227CB003761FD /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		DD78E7542C1227DB003761FD /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +198,10 @@
 		DD78E7352C10F2EB003761FD /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				DD78E74E2C1227AA003761FD /* DetailViewController.swift */,
+				DD78E7502C1227BE003761FD /* DetailInteractor.swift */,
+				DD78E7522C1227CB003761FD /* DetailPresenter.swift */,
+				DD78E7542C1227DB003761FD /* DetailRouter.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -358,13 +370,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD78E7552C1227DB003761FD /* DetailRouter.swift in Sources */,
 				DD78E7062C10F118003761FD /* HomeViewController.swift in Sources */,
 				DD78E7022C10F118003761FD /* AppDelegate.swift in Sources */,
 				DD78E7432C10F42C003761FD /* NetworkService.swift in Sources */,
+				DD78E74F2C1227AA003761FD /* DetailViewController.swift in Sources */,
 				DD78E7402C10F3B1003761FD /* HomeRouter.swift in Sources */,
+				DD78E7532C1227CB003761FD /* DetailPresenter.swift in Sources */,
 				DD78E74A2C11F6E3003761FD /* RecentCell.swift in Sources */,
 				DD78E73E2C10F3A9003761FD /* Entity.swift in Sources */,
 				DD78E7042C10F118003761FD /* SceneDelegate.swift in Sources */,
+				DD78E7512C1227BE003761FD /* DetailInteractor.swift in Sources */,
 				DD78E73C2C10F36E003761FD /* HomePresenter.swift in Sources */,
 				DD78E74D2C120141003761FD /* Alert.swift in Sources */,
 				DD78E7462C112920003761FD /* HideKeyboard.swift in Sources */,

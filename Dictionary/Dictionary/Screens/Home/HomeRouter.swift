@@ -8,8 +8,12 @@
 import Foundation
 import UIKit
 
+enum HomeRoutes {
+    case detail(source: Word?)
+}
+
 protocol HomeRouterProtocol {
-    func navigateToWordDetail(word: Word)
+    func navigateToWordDetail(_ route: HomeRoutes)
 }
 
 final class HomeRouter {
@@ -35,9 +39,12 @@ final class HomeRouter {
 }
 
 extension HomeRouter: HomeRouterProtocol {
-
-    func navigateToWordDetail(word: Word) {
-        //let wordDetailViewController = WordDetailBuilder.make(word: word)
-        //viewController?.navigationController?.pushViewController(wordDetailViewController, animated: true)
+    func navigateToWordDetail(_ route: HomeRoutes) {
+        switch route {
+        case .detail(let source):
+            guard let source else { return }
+            let detailViewController = DetailRouter.createDetailModule()
+            viewController?.navigationController?.pushViewController(detailViewController, animated: true)
+        }
     }
 }
