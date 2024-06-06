@@ -8,10 +8,16 @@
 import Foundation
 
 protocol HomePresenterProtocol: AnyObject {
+    var numberOfRecentWords: Int { get }
+
     func viewDidLoad()
     func searchButtonTapped(word: String)
     func keyboardWillShow(withHeight height: CGFloat)
     func keyboardWillHide()
+    func saveRecentWord(word: String)
+    func getRecentWords() -> [String]
+    func recentWord(at index: Int) -> String
+    func deleteRecentWord(at index: Int)
 }
 
 final class HomePresenter {
@@ -27,7 +33,57 @@ final class HomePresenter {
     }
 }
 
+// MARK: - HomePresenterProtocol
 extension HomePresenter: HomePresenterProtocol {
+
+    func deleteRecentWord(at index: Int) {
+        var recentWords = getRecentWords()
+        recentWords.remove(at: index)
+        let userDefaults = UserDefaults.standard
+        let key = "recentWords"
+        userDefaults.set(recentWords, forKey: key)
+        view.updateView()
+    }
+
+    func recentWord(at index: Int) -> String {
+        getRecentWords()[index]
+    }
+
+    var numberOfRecentWords: Int {
+        getRecentWords().count
+    }
+
+    func saveRecentWord(word: String) {
+        let userDefaults = UserDefaults.standard
+        let key = "recentWords"
+
+        // Önce mevcut kelimeleri alın
+        var recentWords = userDefaults.stringArray(forKey: key) ?? []
+
+        // Eğer kelime zaten mevcutsa, onu kaldır
+        if let index = recentWords.firstIndex(of: word) {
+            recentWords.remove(at: index)
+        }
+
+        // Yeni kelimeyi başa ekleyin
+        recentWords.insert(word, at: 0)
+
+        // Eğer kelime sayısı 5'i geçtiyse, son kelimeyi kaldırın
+        if recentWords.count > 5 {
+            recentWords.removeLast()
+        }
+
+        // Güncellenmiş kelime dizisini kaydedin
+        userDefaults.set(recentWords, forKey: key)
+        view.updateView()
+    }
+
+    func getRecentWords() -> [String] {
+        let userDefaults = UserDefaults.standard
+        let key = "recentWords"
+        return userDefaults.stringArray(forKey: key) ?? []
+    }
+
     func keyboardWillShow(withHeight height: CGFloat) {
         view.adjustSearchButton(forKeyboardHeight: height)
     }
@@ -54,6 +110,7 @@ extension HomePresenter: HomePresenterProtocol {
     }
 }
 
+// MARK: - HomeInteractorOutputProtocol
 extension HomePresenter: HomeInteractorOutputProtocol {
 
     func handleWordResult(_ result: Result<Word, Error>) {

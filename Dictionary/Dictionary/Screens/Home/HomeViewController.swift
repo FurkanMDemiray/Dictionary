@@ -24,15 +24,14 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
-        configureTableView()
-        setupKeyboardObservers()
-        hideKeyboardWhenTappedAround()
+        setupFeatures()
     }
 
     deinit {
         removeKeyboardObservers()
     }
 
+//MARK: - Configure functions
     private func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
@@ -40,8 +39,22 @@ final class HomeViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.isScrollEnabled = false
         tableView.register(UINib(nibName: "RecentCell", bundle: nil), forCellReuseIdentifier: "RecentCell")
+
     }
 
+    private func configureSearchBar() {
+        searchBar.backgroundColor = .white
+        searchBar.backgroundImage = UIImage()
+    }
+
+    private func setupFeatures() {
+        configureTableView()
+        configureSearchBar()
+        setupKeyboardObservers()
+        hideKeyboardWhenTappedAround()
+    }
+
+//MARK: - Keyboard Observers
     private func setupKeyboardObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -66,7 +79,12 @@ final class HomeViewController: UIViewController {
 
     @IBAction func searchBtnClicked(_ sender: Any) {
         guard let word = searchBar.text else { return }
+        if word.isEmpty {
+            showAlert(title: "Error", message: "Please enter a word", actions: [UIAlertAction(title: "OK", style: .default, handler: nil)])
+            return
+        }
         presenter.searchButtonTapped(word: word)
+        presenter.saveRecentWord(word: word)
     }
 }
 
@@ -74,13 +92,11 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: HomeViewControllerProtocol {
 
     func updateView() {
-        //tableView.reloadData()
+        tableView.reloadData()
     }
 
     func showError(error: Error) {
-        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        showAlert(title: "Error", message: error.localizedDescription, actions: [UIAlertAction(title: "OK", style: .default, handler: nil)])
     }
 
     func adjustSearchButton(forKeyboardHeight height: CGFloat) {
@@ -103,12 +119,40 @@ extension HomeViewController: UISearchBarDelegate {
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return presenter.numberOfRecentWords
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RecentCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RecentCell", for: indexPath) as! RecentCell
+        cell.configure(with: presenter.recentWord(at: indexPath.row))
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let word = presenter.recentWord(at: indexPath.row)
+        searchBar.text = word
+        presenter.searchButtonTapped(word: word)
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            showAlert(
+                title: "Are you sure?",
+                message: "Do you want to delete this word?",
+                actions: [UIAlertAction(
+                    title: "Cancel",
+                    style: .cancel,
+                    handler: nil
+                    ),
+                    UIAlertAction(
+                        title: "Delete",
+                        style: .destructive
+                    ) { _ in self.presenter.deleteRecentWord(
+                        at: indexPath.row
+                        )
+                    }]
+            )
+        }
     }
 }
 
