@@ -38,6 +38,7 @@ final class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
+        tableView.isScrollEnabled = false
         tableView.register(UINib(nibName: "RecentCell", bundle: nil), forCellReuseIdentifier: "RecentCell")
     }
 

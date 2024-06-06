@@ -10,16 +10,17 @@ import UIKit
 class RecentCell: UITableViewCell {
 
     @IBOutlet weak var recentWordLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        backgroundView?.backgroundColor = .clear
+        backgroundColor = .clear
+        selectionStyle = .none
+        selectedBackgroundView = nil
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func configure(with word: String) {
+        recentWordLabel.text = word
     }
-    
+
 }
