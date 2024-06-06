@@ -24,7 +24,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
-        setupUI()
+        configureTableView()
         setupKeyboardObservers()
         hideKeyboardWhenTappedAround()
     }
@@ -33,9 +33,12 @@ final class HomeViewController: UIViewController {
         removeKeyboardObservers()
     }
 
-    private func setupUI() {
+    private func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        tableView.register(UINib(nibName: "RecentCell", bundle: nil), forCellReuseIdentifier: "RecentCell")
     }
 
     private func setupKeyboardObservers() {
@@ -103,7 +106,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RecentCell", for: indexPath)
+        return cell
     }
 }
 
