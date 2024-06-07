@@ -18,6 +18,10 @@ protocol DetailPresenterProtocol {
     func getMainButtonTitle() -> String
     func clearTitle()
     func resetFirstClicked()
+    func getWordName() -> String
+    func getWordPhonetic() -> String
+    func getWordMeanings() -> [Meaning]
+    func getWordPhonetics() -> [Phonetic]
 }
 
 final class DetailPresenter {
@@ -25,14 +29,15 @@ final class DetailPresenter {
     weak var view: DetailViewControllerProtocol!
     var interactor: DetailInteractorProtocol
     var router: DetailRouterProtocol
+    var word: Word?
 
-    var buttonArray = [String]()
-    var isCancelBtnClicked = false
-    var isNounBtnClicked = false
-    var isVerbBtnClicked = false
-    var isAdjectiveBtnClicked = false
-    var isFirstClicked = false
-    var title = ""
+    private var buttonArray = [String]()
+    private var isCancelBtnClicked = false
+    private var isNounBtnClicked = false
+    private var isVerbBtnClicked = false
+    private var isAdjectiveBtnClicked = false
+    private var isFirstClicked = false
+    private var title = ""
 
     init(view: DetailViewControllerProtocol, interactor: DetailInteractorProtocol, router: DetailRouterProtocol) {
         self.interactor = interactor
@@ -71,6 +76,22 @@ extension DetailPresenter {
 
 // MARK: - DetailPresenterProtocol
 extension DetailPresenter: DetailPresenterProtocol {
+    func getWordName() -> String {
+        word?.word ?? ""
+    }
+
+    func getWordPhonetic() -> String {
+        word?.phonetic ?? ""
+    }
+
+    func getWordMeanings() -> [Meaning] {
+        word?.meanings ?? [Meaning]()
+    }
+
+    func getWordPhonetics() -> [Phonetic] {
+        word?.phonetics ?? [Phonetic]()
+    }
+
     func resetFirstClicked() {
         isFirstClicked = false
     }
@@ -104,8 +125,7 @@ extension DetailPresenter: DetailPresenterProtocol {
     func nounButtonClicked() {
         view.showCancelButton()
         removeFromClickedButtons("Noun")
-        if isFirstClicked { title += ", Noun" }
-        else { title += "Noun"; isFirstClicked = true }
+        if isFirstClicked { title += ", Noun" } else { title += "Noun"; isFirstClicked = true }
         buttonArray.append("Noun")
         view.hideSelectedButton()
     }
@@ -113,8 +133,7 @@ extension DetailPresenter: DetailPresenterProtocol {
     func verbButtonClicked() {
         view.showCancelButton()
         removeFromClickedButtons("Verb")
-        if isFirstClicked { title += ", Verb" }
-        else { title += "Verb"; isFirstClicked = true }
+        if isFirstClicked { title += ", Verb" } else { title += "Verb"; isFirstClicked = true }
         buttonArray.append("Verb")
         view.hideSelectedButton()
     }
@@ -122,13 +141,10 @@ extension DetailPresenter: DetailPresenterProtocol {
     func adjectiveButtonClicked() {
         view.showCancelButton()
         removeFromClickedButtons("Adjective")
-        if isFirstClicked { title += ", Adjective" }
-        else { title += "Adjective"; isFirstClicked = true }
+        if isFirstClicked { title += ", Adjective" } else { title += "Adjective"; isFirstClicked = true }
         buttonArray.append("Adjective")
         view.hideSelectedButton()
     }
-
-
 }
 
 extension DetailPresenter: DetailInteractorOutputProtocol {

@@ -43,7 +43,7 @@ extension HomeRouter: HomeRouterProtocol {
         switch route {
         case .detail(let source):
             guard let source else { return }
-            let detailViewController = DetailRouter.createDetailModule()
+            let detailViewController = DetailRouter.createDetailModule(source)
             viewController?.navigationController?.pushViewController(detailViewController, animated: true)
         }
     }

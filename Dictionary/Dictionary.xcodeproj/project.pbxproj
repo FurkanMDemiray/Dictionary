@@ -19,7 +19,7 @@
 		DD78E7382C10F346003761FD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DD78E7372C10F346003761FD /* Alamofire */; };
 		DD78E73A2C10F361003761FD /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E7392C10F361003761FD /* HomeInteractor.swift */; };
 		DD78E73C2C10F36E003761FD /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E73B2C10F36D003761FD /* HomePresenter.swift */; };
-		DD78E73E2C10F3A9003761FD /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E73D2C10F3A9003761FD /* Entity.swift */; };
+		DD78E73E2C10F3A9003761FD /* WordEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E73D2C10F3A9003761FD /* WordEntity.swift */; };
 		DD78E7402C10F3B1003761FD /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E73F2C10F3B1003761FD /* HomeRouter.swift */; };
 		DD78E7432C10F42C003761FD /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E7422C10F42C003761FD /* NetworkService.swift */; };
 		DD78E7462C112920003761FD /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E7452C112920003761FD /* HideKeyboard.swift */; };
@@ -65,7 +65,7 @@
 		DD78E7242C10F11A003761FD /* DictionaryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DD78E7392C10F361003761FD /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		DD78E73B2C10F36D003761FD /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
-		DD78E73D2C10F3A9003761FD /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		DD78E73D2C10F3A9003761FD /* WordEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordEntity.swift; sourceTree = "<group>"; };
 		DD78E73F2C10F3B1003761FD /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		DD78E7422C10F42C003761FD /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		DD78E7452C112920003761FD /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
@@ -189,7 +189,7 @@
 				DD78E7052C10F118003761FD /* HomeViewController.swift */,
 				DD78E7392C10F361003761FD /* HomeInteractor.swift */,
 				DD78E73B2C10F36D003761FD /* HomePresenter.swift */,
-				DD78E73D2C10F3A9003761FD /* Entity.swift */,
+				DD78E73D2C10F3A9003761FD /* WordEntity.swift */,
 				DD78E73F2C10F3B1003761FD /* HomeRouter.swift */,
 			);
 			path = Home;
@@ -378,7 +378,7 @@
 				DD78E7402C10F3B1003761FD /* HomeRouter.swift in Sources */,
 				DD78E7532C1227CB003761FD /* DetailPresenter.swift in Sources */,
 				DD78E74A2C11F6E3003761FD /* RecentCell.swift in Sources */,
-				DD78E73E2C10F3A9003761FD /* Entity.swift in Sources */,
+				DD78E73E2C10F3A9003761FD /* WordEntity.swift in Sources */,
 				DD78E7042C10F118003761FD /* SceneDelegate.swift in Sources */,
 				DD78E7512C1227BE003761FD /* DetailInteractor.swift in Sources */,
 				DD78E73C2C10F36E003761FD /* HomePresenter.swift in Sources */,
@@ -573,6 +573,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -600,6 +601,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

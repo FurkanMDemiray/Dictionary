@@ -19,6 +19,8 @@ protocol DetailViewControllerProtocol: AnyObject {
 
 final class DetailViewController: UIViewController {
 
+    @IBOutlet weak var wordLabel: UILabel!
+    @IBOutlet weak var phoneticLabel: UILabel!
     @IBOutlet weak var mainButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var nounButton: UIButton!
@@ -30,6 +32,7 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureButtons()
+        setLabels()
     }
 
 //MARK: - Configures
@@ -45,6 +48,13 @@ final class DetailViewController: UIViewController {
             }
             self.mainButton.isHidden = true
             self.hideCancelButton()
+        }
+    }
+
+    private func setLabels() {
+        DispatchQueue.main.async {
+            self.wordLabel.text = self.presenter.getWordName().capitalized
+            self.phoneticLabel.text = self.presenter.getWordPhonetic()
         }
     }
 

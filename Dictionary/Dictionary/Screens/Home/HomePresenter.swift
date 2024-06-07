@@ -57,23 +57,18 @@ extension HomePresenter: HomePresenterProtocol {
         let userDefaults = UserDefaults.standard
         let key = "recentWords"
 
-        // Önce mevcut kelimeleri alın
         var recentWords = userDefaults.stringArray(forKey: key) ?? []
 
-        // Eğer kelime zaten mevcutsa, onu kaldır
         if let index = recentWords.firstIndex(of: word) {
             recentWords.remove(at: index)
         }
 
-        // Yeni kelimeyi başa ekleyin
         recentWords.insert(word, at: 0)
 
-        // Eğer kelime sayısı 5'i geçtiyse, son kelimeyi kaldırın
         if recentWords.count > 5 {
             recentWords.removeLast()
         }
 
-        // Güncellenmiş kelime dizisini kaydedin
         userDefaults.set(recentWords, forKey: key)
         view.updateView()
     }

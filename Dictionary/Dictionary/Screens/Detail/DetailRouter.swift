@@ -16,7 +16,7 @@ final class DetailRouter {
 
     weak var viewController: DetailViewController?
 
-    static func createDetailModule() -> DetailViewController {
+    static func createDetailModule(_ word: Word) -> DetailViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         guard let view = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
             fatalError("Failed to instantiate DetailViewController from storyboard.")
@@ -28,6 +28,7 @@ final class DetailRouter {
         view.presenter = presenter
         interactor.output = presenter
         router.viewController = view
+        presenter.word = word
 
         return view
     }
