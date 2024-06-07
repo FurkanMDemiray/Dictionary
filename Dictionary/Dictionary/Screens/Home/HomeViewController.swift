@@ -25,7 +25,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         presenter.viewDidLoad()
         setupFeatures()
-        title = "Dictionary"
+
     }
 
     deinit {
@@ -47,7 +47,17 @@ final class HomeViewController: UIViewController {
         searchBar.backgroundImage = UIImage()
     }
 
+    private func configureTitle() {
+        let titleLabel = UILabel()
+        titleLabel.text = "VIPER Dictionary"
+        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        titleLabel.textColor = .black
+        titleLabel.sizeToFit()
+        navigationItem.titleView = titleLabel
+    }
+
     private func setupFeatures() {
+        configureTitle()
         configureTableView()
         configureSearchBar()
         setupKeyboardObservers()
