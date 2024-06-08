@@ -22,6 +22,7 @@ protocol DetailPresenterProtocol {
     func getWordPhonetic() -> String
     func getWordMeanings() -> [Meaning]
     func getWordPhonetics() -> [Phonetic]
+    func playSound()
 }
 
 final class DetailPresenter {
@@ -76,6 +77,20 @@ extension DetailPresenter {
 
 // MARK: - DetailPresenterProtocol
 extension DetailPresenter: DetailPresenterProtocol {
+    func playSound() {
+        guard let firtAudio = word?.phonetics?.first?.audio else { return }
+        guard let secondAudio = word?.phonetics?.last?.audio else { return }
+
+        if firtAudio != "" {
+            interactor.playSound(firtAudio)
+        } else if secondAudio != "" {
+            interactor.playSound(secondAudio)
+        } else {
+            view.hideSoundButton()
+            print("No audio available")
+        }
+    }
+
     func getWordName() -> String {
         word?.word ?? ""
     }

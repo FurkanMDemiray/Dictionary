@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import AVFoundation
 
 protocol DetailInteractorProtocol {
-    // Interactor ile ilgili protokoller
+    func playSound(_ audio: String)
 }
 
 protocol DetailInteractorOutputProtocol {
@@ -16,14 +17,19 @@ protocol DetailInteractorOutputProtocol {
 }
 
 final class DetailInteractor {
-
     var presenter: DetailInteractorOutputProtocol!
     var output: DetailInteractorOutputProtocol!
+
+    private var audioManager: AudioManager? = AudioManager.shared
 
 }
 
 extension DetailInteractor: DetailInteractorProtocol {
-    // Interactor ile ilgili implementasyonlar
+    func playSound(_ audio: String) {
+        // activate our session before playing audio
+
+        audioManager?.startAudio(audio)
+    }
 }
 
 extension DetailInteractor: DetailInteractorOutputProtocol {

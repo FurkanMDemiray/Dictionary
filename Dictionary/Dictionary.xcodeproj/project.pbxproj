@@ -30,6 +30,7 @@
 		DD78E7512C1227BE003761FD /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E7502C1227BE003761FD /* DetailInteractor.swift */; };
 		DD78E7532C1227CB003761FD /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E7522C1227CB003761FD /* DetailPresenter.swift */; };
 		DD78E7552C1227DB003761FD /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E7542C1227DB003761FD /* DetailRouter.swift */; };
+		DD9277872C14E79F0076C735 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9277862C14E79F0076C735 /* AudioManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		DD78E7502C1227BE003761FD /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
 		DD78E7522C1227CB003761FD /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		DD78E7542C1227DB003761FD /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
+		DD9277862C14E79F0076C735 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 		DD78E7312C10F2B1003761FD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DD9277852C14E78B0076C735 /* AudioManager */,
 				DD78E7442C112916003761FD /* Extensions */,
 				DD78E7412C10F41C003761FD /* Network */,
 				DD78E7072C10F118003761FD /* Main.storyboard */,
@@ -230,6 +233,14 @@
 				DD78E7492C11F6E3003761FD /* RecentCell.xib */,
 			);
 			path = RecentCell;
+			sourceTree = "<group>";
+		};
+		DD9277852C14E78B0076C735 /* AudioManager */ = {
+			isa = PBXGroup;
+			children = (
+				DD9277862C14E79F0076C735 /* AudioManager.swift */,
+			);
+			path = AudioManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,6 +391,7 @@
 				DD78E74A2C11F6E3003761FD /* RecentCell.swift in Sources */,
 				DD78E73E2C10F3A9003761FD /* WordEntity.swift in Sources */,
 				DD78E7042C10F118003761FD /* SceneDelegate.swift in Sources */,
+				DD9277872C14E79F0076C735 /* AudioManager.swift in Sources */,
 				DD78E7512C1227BE003761FD /* DetailInteractor.swift in Sources */,
 				DD78E73C2C10F36E003761FD /* HomePresenter.swift in Sources */,
 				DD78E74D2C120141003761FD /* Alert.swift in Sources */,

@@ -15,6 +15,7 @@ protocol DetailViewControllerProtocol: AnyObject {
     func cancelButtonClicked()
     func hideSelectedButton()
     func showAllButtons()
+    func hideSoundButton()
 }
 
 final class DetailViewController: UIViewController {
@@ -26,6 +27,7 @@ final class DetailViewController: UIViewController {
     @IBOutlet weak var nounButton: UIButton!
     @IBOutlet weak var verbButton: UIButton!
     @IBOutlet weak var adjectiveButton: UIButton!
+    @IBOutlet weak var volumeImage: UIImageView!
 
     var presenter: DetailPresenterProtocol!
 
@@ -33,6 +35,7 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
         configureButtons()
         setLabels()
+        configureVolumeImage()
     }
 
 //MARK: - Configures
@@ -58,6 +61,12 @@ final class DetailViewController: UIViewController {
         }
     }
 
+    private func configureVolumeImage() {
+        volumeImage.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(volumeImageTapped))
+        volumeImage.addGestureRecognizer(tap)
+    }
+
 //MARK: - Actions
     @IBAction func cancelBtnClicked(_ sender: Any) {
         presenter.cancelBtnClicked()
@@ -74,10 +83,21 @@ final class DetailViewController: UIViewController {
     @IBAction func adjectiveButtonClicked(_ sender: Any) {
         presenter.adjectiveButtonClicked()
     }
+
+    @objc func volumeImageTapped() {
+        presenter.playSound()
+    }
 }
 
 //MARK: - DetailViewControllerProtocol
 extension DetailViewController: DetailViewControllerProtocol {
+
+    func hideSoundButton() {
+        DispatchQueue.main.async {
+            self.volumeImage.isHidden = true
+        }
+    }
+
     func hideSelectedButton() {
         DispatchQueue.main.async {
             for button in self.presenter.clickedButtons {
