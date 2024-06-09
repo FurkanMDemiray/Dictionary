@@ -9,6 +9,12 @@ import Foundation
 
 protocol DetailPresenterProtocol {
     var clickedButtons: [String] { get }
+    var nouns: [String] { get }
+    var verbs: [String] { get }
+    var adjectives: [String] { get }
+    var partsOfSpeech: [String] { get }
+    var definitions: [String] { get }
+    var examples: [String] { get }
 
     func cancelBtnClicked()
     func nounButtonClicked()
@@ -23,6 +29,7 @@ protocol DetailPresenterProtocol {
     func getWordMeanings() -> [Meaning]
     func getWordPhonetics() -> [Phonetic]
     func playSound()
+    func getTypes()
 }
 
 final class DetailPresenter {
@@ -39,6 +46,10 @@ final class DetailPresenter {
     private var isAdjectiveBtnClicked = false
     private var isFirstClicked = false
     private var title = ""
+    private var allNounsDefinitions = [String]()
+    private var allVerbsDefinitions = [String]()
+    private var allAdjectivesDefinitions = [String]()
+    private var wordTypes = [String]()
 
     init(view: DetailViewControllerProtocol, interactor: DetailInteractorProtocol, router: DetailRouterProtocol) {
         self.interactor = interactor
@@ -73,10 +84,70 @@ extension DetailPresenter {
             buttonArray.removeAll { $0 == "Adjective" }
         }
     }
+
+
 }
 
 // MARK: - DetailPresenterProtocol
 extension DetailPresenter: DetailPresenterProtocol {
+    var definitions: [String] {
+        let definitions = allNounsDefinitions + allVerbsDefinitions + allAdjectivesDefinitions
+        return definitions
+    }
+
+    var examples: [String] {
+        [""]
+    }
+
+    var partsOfSpeech: [String] {
+        wordTypes
+    }
+
+    func getTypes() {
+        for meaning in word?.meanings ?? [Meaning]() {
+            if meaning.partOfSpeech == "noun" {
+                for definition in meaning.definitions ?? [Definition]() {
+                    allNounsDefinitions.append(definition.definition ?? "")
+                }
+            }
+            else if meaning.partOfSpeech == "verb" {
+                for definition in meaning.definitions ?? [Definition]() {
+                    allVerbsDefinitions.append(definition.definition ?? "")
+                }
+            }
+            else if meaning.partOfSpeech == "adjective" {
+                for definition in meaning.definitions ?? [Definition]() {
+                    allAdjectivesDefinitions.append(definition.definition ?? "")
+                }
+            }
+        }
+        for _ in 0..<allNounsDefinitions.count {
+            wordTypes.append("Noun")
+        }
+        for _ in 0..<allVerbsDefinitions.count {
+            wordTypes.append("Verb")
+        }
+        for _ in 0..<allAdjectivesDefinitions.count {
+            wordTypes.append("Adjective")
+        }
+        print("nouns", allNounsDefinitions)
+        print("verbs", allVerbsDefinitions)
+        print("adjectives", allAdjectivesDefinitions)
+        print("wordTypes", wordTypes)
+    }
+
+    var nouns: [String] {
+        allNounsDefinitions
+    }
+
+    var verbs: [String] {
+        allVerbsDefinitions
+    }
+
+    var adjectives: [String] {
+        allAdjectivesDefinitions
+    }
+
     func playSound() {
         guard let firtAudio = word?.phonetics?.first?.audio else { return }
         guard let secondAudio = word?.phonetics?.last?.audio else { return }

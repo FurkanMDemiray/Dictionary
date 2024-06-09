@@ -183,11 +183,46 @@
                                     <constraint firstItem="2KG-RL-ucu" firstAttribute="top" secondItem="rzT-uW-oll" secondAttribute="top" constant="16" id="tev-SN-pXo"/>
                                 </constraints>
                             </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEi-9J-6AJ">
+                                <rect key="frame" x="0.0" y="217" width="393" height="601"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIt-ht-W5q">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="2000"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aum-XZ-O2c">
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="2000"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="2000" id="LTG-yN-1PO"/>
+                                                </constraints>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="393" id="3yU-eS-7Wz"/>
+                                            <constraint firstAttribute="trailing" secondItem="aum-XZ-O2c" secondAttribute="trailing" id="9a3-Tj-sMV"/>
+                                            <constraint firstItem="aum-XZ-O2c" firstAttribute="top" secondItem="PIt-ht-W5q" secondAttribute="top" id="Dfr-AY-7SC"/>
+                                            <constraint firstItem="aum-XZ-O2c" firstAttribute="leading" secondItem="PIt-ht-W5q" secondAttribute="leading" id="JXh-1X-c5V"/>
+                                            <constraint firstAttribute="height" constant="2000" id="gYh-KJ-acE"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="PIt-ht-W5q" firstAttribute="top" secondItem="AEi-9J-6AJ" secondAttribute="top" id="Jsd-bD-Sd6"/>
+                                    <constraint firstAttribute="trailing" secondItem="PIt-ht-W5q" secondAttribute="trailing" id="MKY-yL-j9f"/>
+                                    <constraint firstItem="PIt-ht-W5q" firstAttribute="leading" secondItem="AEi-9J-6AJ" secondAttribute="leading" id="bx0-Rl-kNz"/>
+                                    <constraint firstAttribute="bottom" secondItem="PIt-ht-W5q" secondAttribute="bottom" id="uvF-p3-mFV"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cZn-6D-gCQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="AEi-9J-6AJ" firstAttribute="leading" secondItem="cZn-6D-gCQ" secondAttribute="leading" id="DaE-Xc-SlC"/>
                             <constraint firstItem="rzT-uW-oll" firstAttribute="leading" secondItem="cZn-6D-gCQ" secondAttribute="leading" id="HJp-SK-L2I"/>
+                            <constraint firstItem="cZn-6D-gCQ" firstAttribute="bottom" secondItem="AEi-9J-6AJ" secondAttribute="bottom" id="VTN-Mr-Kbq"/>
+                            <constraint firstItem="cZn-6D-gCQ" firstAttribute="trailing" secondItem="AEi-9J-6AJ" secondAttribute="trailing" id="Y2f-Ma-cHA"/>
+                            <constraint firstItem="AEi-9J-6AJ" firstAttribute="top" secondItem="rzT-uW-oll" secondAttribute="bottom" id="eLa-tW-RG0"/>
                             <constraint firstItem="rzT-uW-oll" firstAttribute="top" secondItem="cZn-6D-gCQ" secondAttribute="top" constant="8" id="mAu-Gf-CP2"/>
                             <constraint firstItem="cZn-6D-gCQ" firstAttribute="trailing" secondItem="rzT-uW-oll" secondAttribute="trailing" id="yeA-hi-0x4"/>
                         </constraints>
@@ -199,6 +234,9 @@
                         <outlet property="mainButton" destination="mBw-Vo-YvP" id="1Nc-b7-UWU"/>
                         <outlet property="nounButton" destination="Svp-na-X1b" id="czE-QL-hYR"/>
                         <outlet property="phoneticLabel" destination="D0D-2f-jh9" id="yNr-9h-bzY"/>
+                        <outlet property="scrollViewHeightContraint" destination="gYh-KJ-acE" id="Vcb-u6-qgg"/>
+                        <outlet property="tableView" destination="aum-XZ-O2c" id="AiE-Df-Zfe"/>
+                        <outlet property="tableViewHeightConstraint" destination="LTG-yN-1PO" id="xu6-ZV-RqL"/>
                         <outlet property="verbButton" destination="CJD-JU-b9Y" id="Xkf-uK-bMs"/>
                         <outlet property="volumeImage" destination="6p3-gG-FGK" id="vpb-Va-Ia8"/>
                         <outlet property="wordLabel" destination="2KG-RL-ucu" id="qgu-o6-J0V"/>

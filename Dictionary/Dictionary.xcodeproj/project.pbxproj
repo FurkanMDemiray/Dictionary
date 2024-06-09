@@ -31,6 +31,8 @@
 		DD78E7532C1227CB003761FD /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E7522C1227CB003761FD /* DetailPresenter.swift */; };
 		DD78E7552C1227DB003761FD /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78E7542C1227DB003761FD /* DetailRouter.swift */; };
 		DD9277872C14E79F0076C735 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9277862C14E79F0076C735 /* AudioManager.swift */; };
+		DD92778B2C14F89B0076C735 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9277892C14F89B0076C735 /* DetailCell.swift */; };
+		DD92778C2C14F89B0076C735 /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD92778A2C14F89B0076C735 /* DetailCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,8 @@
 		DD78E7522C1227CB003761FD /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		DD78E7542C1227DB003761FD /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
 		DD9277862C14E79F0076C735 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		DD9277892C14F89B0076C735 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		DD92778A2C14F89B0076C735 /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +205,7 @@
 		DD78E7352C10F2EB003761FD /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				DD9277882C14F87F0076C735 /* DetailCell */,
 				DD78E74E2C1227AA003761FD /* DetailViewController.swift */,
 				DD78E7502C1227BE003761FD /* DetailInteractor.swift */,
 				DD78E7522C1227CB003761FD /* DetailPresenter.swift */,
@@ -241,6 +246,15 @@
 				DD9277862C14E79F0076C735 /* AudioManager.swift */,
 			);
 			path = AudioManager;
+			sourceTree = "<group>";
+		};
+		DD9277882C14F87F0076C735 /* DetailCell */ = {
+			isa = PBXGroup;
+			children = (
+				DD9277892C14F89B0076C735 /* DetailCell.swift */,
+				DD92778A2C14F89B0076C735 /* DetailCell.xib */,
+			);
+			path = DetailCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,6 +371,7 @@
 				DD78E70B2C10F11A003761FD /* Assets.xcassets in Resources */,
 				DD78E70E2C10F11A003761FD /* Base in Resources */,
 				DD78E7092C10F118003761FD /* Base in Resources */,
+				DD92778C2C14F89B0076C735 /* DetailCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +408,7 @@
 				DD78E7042C10F118003761FD /* SceneDelegate.swift in Sources */,
 				DD9277872C14E79F0076C735 /* AudioManager.swift in Sources */,
 				DD78E7512C1227BE003761FD /* DetailInteractor.swift in Sources */,
+				DD92778B2C14F89B0076C735 /* DetailCell.swift in Sources */,
 				DD78E73C2C10F36E003761FD /* HomePresenter.swift in Sources */,
 				DD78E74D2C120141003761FD /* Alert.swift in Sources */,
 				DD78E7462C112920003761FD /* HideKeyboard.swift in Sources */,

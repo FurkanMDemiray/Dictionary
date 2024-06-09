@@ -26,8 +26,6 @@ final class DetailInteractor {
 
 extension DetailInteractor: DetailInteractorProtocol {
     func playSound(_ audio: String) {
-        // activate our session before playing audio
-
         audioManager?.startAudio(audio)
     }
 }

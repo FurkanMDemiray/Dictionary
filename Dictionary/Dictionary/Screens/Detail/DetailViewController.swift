@@ -28,14 +28,15 @@ final class DetailViewController: UIViewController {
     @IBOutlet weak var verbButton: UIButton!
     @IBOutlet weak var adjectiveButton: UIButton!
     @IBOutlet weak var volumeImage: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewHeightContraint: NSLayoutConstraint!
 
     var presenter: DetailPresenterProtocol!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureButtons()
-        setLabels()
-        configureVolumeImage()
+        setupConfigure()
     }
 
 //MARK: - Configures
@@ -65,6 +66,28 @@ final class DetailViewController: UIViewController {
         volumeImage.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(volumeImageTapped))
         volumeImage.addGestureRecognizer(tap)
+    }
+
+    private func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "DetailCell", bundle: nil), forCellReuseIdentifier: "DetailCell")
+    }
+
+    private func configureConstraints() {
+        DispatchQueue.main.async {
+            self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
+            self.scrollViewHeightContraint.constant = self.tableView.contentSize.height
+        }
+    }
+
+    private func setupConfigure() {
+        configureButtons()
+        setLabels()
+        configureVolumeImage()
+        presenter.getTypes()
+        configureTableView()
+        configureConstraints()
     }
 
 //MARK: - Actions
@@ -148,5 +171,19 @@ extension DetailViewController: DetailViewControllerProtocol {
 
     func showError(error: Error) {
 
+    }
+}
+
+
+//MARK: - UITableViewDelegate, UITableViewDataSource
+extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        presenter.nouns.count + presenter.verbs.count + presenter.adjectives.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailCell
+        cell.configureCell(partOfSpeech: presenter.partsOfSpeech[indexPath.row], definition: presenter.definitions[indexPath.row])
+        return cell
     }
 }
