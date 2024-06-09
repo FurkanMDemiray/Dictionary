@@ -21,6 +21,10 @@ final class HomeViewController: UIViewController {
 
     var presenter: HomePresenterProtocol!
 
+    override func viewWillAppear(_ animated: Bool) {
+        DetailCell.counter = 0
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()

@@ -130,10 +130,6 @@ extension DetailPresenter: DetailPresenterProtocol {
         for _ in 0..<allAdjectivesDefinitions.count {
             wordTypes.append("Adjective")
         }
-        print("nouns", allNounsDefinitions)
-        print("verbs", allVerbsDefinitions)
-        print("adjectives", allAdjectivesDefinitions)
-        print("wordTypes", wordTypes)
     }
 
     var nouns: [String] {

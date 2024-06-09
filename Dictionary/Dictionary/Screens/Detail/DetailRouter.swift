@@ -29,7 +29,7 @@ final class DetailRouter {
         interactor.output = presenter
         router.viewController = view
         presenter.word = word
-
+     
         return view
     }
 
