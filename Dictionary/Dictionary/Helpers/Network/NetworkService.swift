@@ -15,7 +15,8 @@ protocol NetworkServiceProtocol {
 final class NetworkService: NetworkServiceProtocol {
 
     func fetch<T: Decodable>(url: String, completion: @escaping (Result<T, Error>) -> Void) {
-        AF.request(url).responseDecodable(of: T.self) { response in
+        AF.request(url).responseDecodable(of: T.self) { [weak self] response in
+            guard let self else { return }
             switch response.result {
             case .success(let value):
                 completion(.success(value))

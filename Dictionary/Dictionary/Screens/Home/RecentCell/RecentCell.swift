@@ -7,9 +7,9 @@
 
 import UIKit
 
-class RecentCell: UITableViewCell {
+final class RecentCell: UITableViewCell {
 
-    @IBOutlet weak var recentWordLabel: UILabel!
+    @IBOutlet private weak var recentWordLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

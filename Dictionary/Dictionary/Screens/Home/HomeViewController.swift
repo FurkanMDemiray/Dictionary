@@ -15,9 +15,9 @@ protocol HomeViewControllerProtocol: AnyObject {
 
 final class HomeViewController: UIViewController {
 
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var searchButtonBottomConstraint: NSLayoutConstraint!
 
     var presenter: HomePresenterProtocol!
 
@@ -91,7 +91,7 @@ final class HomeViewController: UIViewController {
         presenter.keyboardWillHide()
     }
 
-    @IBAction func searchBtnClicked(_ sender: Any) {
+    @IBAction private func searchBtnClicked(_ sender: Any) {
         guard let word = searchBar.text else { return }
         if word.isEmpty {
             showAlert(title: "Error", message: "Please enter a word", actions: [UIAlertAction(title: "OK", style: .default, handler: nil)])

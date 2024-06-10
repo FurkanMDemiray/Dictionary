@@ -33,6 +33,7 @@
 		DD9277872C14E79F0076C735 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9277862C14E79F0076C735 /* AudioManager.swift */; };
 		DD92778B2C14F89B0076C735 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9277892C14F89B0076C735 /* DetailCell.swift */; };
 		DD92778C2C14F89B0076C735 /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD92778A2C14F89B0076C735 /* DetailCell.xib */; };
+		DD9277912C1746E40076C735 /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9277902C1746E30076C735 /* DetailModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		DD9277862C14E79F0076C735 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		DD9277892C14F89B0076C735 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		DD92778A2C14F89B0076C735 /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
+		DD9277902C1746E30076C735 /* DetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			children = (
 				DD78E7322C10F2B8003761FD /* App */,
 				DD78E7312C10F2B1003761FD /* Resources */,
+				DD92778F2C1739E40076C735 /* Helpers */,
 				DD78E7332C10F2DD003761FD /* Screens */,
 				DD78E70F2C10F11A003761FD /* Info.plist */,
 			);
@@ -161,9 +164,6 @@
 		DD78E7312C10F2B1003761FD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DD9277852C14E78B0076C735 /* AudioManager */,
-				DD78E7442C112916003761FD /* Extensions */,
-				DD78E7412C10F41C003761FD /* Network */,
 				DD78E7072C10F118003761FD /* Main.storyboard */,
 				DD78E70C2C10F11A003761FD /* LaunchScreen.storyboard */,
 				DD78E70A2C10F11A003761FD /* Assets.xcassets */,
@@ -209,6 +209,7 @@
 				DD78E74E2C1227AA003761FD /* DetailViewController.swift */,
 				DD78E7502C1227BE003761FD /* DetailInteractor.swift */,
 				DD78E7522C1227CB003761FD /* DetailPresenter.swift */,
+				DD9277902C1746E30076C735 /* DetailModel.swift */,
 				DD78E7542C1227DB003761FD /* DetailRouter.swift */,
 			);
 			path = Detail;
@@ -255,6 +256,16 @@
 				DD92778A2C14F89B0076C735 /* DetailCell.xib */,
 			);
 			path = DetailCell;
+			sourceTree = "<group>";
+		};
+		DD92778F2C1739E40076C735 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DD9277852C14E78B0076C735 /* AudioManager */,
+				DD78E7442C112916003761FD /* Extensions */,
+				DD78E7412C10F41C003761FD /* Network */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,6 +414,7 @@
 				DD78E74F2C1227AA003761FD /* DetailViewController.swift in Sources */,
 				DD78E7402C10F3B1003761FD /* HomeRouter.swift in Sources */,
 				DD78E7532C1227CB003761FD /* DetailPresenter.swift in Sources */,
+				DD9277912C1746E40076C735 /* DetailModel.swift in Sources */,
 				DD78E74A2C11F6E3003761FD /* RecentCell.swift in Sources */,
 				DD78E73E2C10F3A9003761FD /* WordEntity.swift in Sources */,
 				DD78E7042C10F118003761FD /* SceneDelegate.swift in Sources */,

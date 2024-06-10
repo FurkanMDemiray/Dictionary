@@ -7,21 +7,23 @@
 
 import UIKit
 
-class DetailCell: UITableViewCell {
+final class DetailCell: UITableViewCell {
 
-    @IBOutlet weak var wordTypesLabel: UILabel!
-    @IBOutlet weak var definitionsLabel: UILabel!
-    @IBOutlet weak var exampleLabel: UILabel!
+    @IBOutlet private weak var exampleTitle: UILabel!
+    @IBOutlet private weak var wordTypesLabel: UILabel!
+    @IBOutlet private weak var definitionsLabel: UILabel!
+    @IBOutlet private weak var exampleLabel: UILabel!
 
-     static var counter = 0
-    private static var tmp = "Noun"
-    let attributedString = NSMutableAttributedString()
+    static var counter = 0
+    static var tmp = "Noun"
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
     }
 
     fileprivate func setWordTypesColor(_ counter: String, _ parthOfSpeech: String) {
+        let attributedString = NSMutableAttributedString()
         let counterString = NSAttributedString(string: "\(counter) - ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         attributedString.append(counterString)
         let partOfSpeechString = NSAttributedString(string: parthOfSpeech, attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemBlue])
@@ -29,8 +31,19 @@ class DetailCell: UITableViewCell {
         wordTypesLabel.attributedText = attributedString
     }
 
-    func configureCell(partOfSpeech: String, definition: String) {
+    fileprivate func setExampleLabel(_ example: String) {
+        if example != "" {
+            exampleLabel.isHidden = false
+            exampleTitle.isHidden = false
+            exampleLabel.text = example
+        }
+        else {
+            exampleLabel.isHidden = true
+            exampleTitle.isHidden = true
+        }
+    }
 
+    fileprivate func setPartOfSpeechLabel(_ partOfSpeech: String) {
         if DetailCell.tmp == partOfSpeech {
             DetailCell.counter += 1
             setWordTypesColor(String(DetailCell.counter), partOfSpeech)
@@ -39,8 +52,16 @@ class DetailCell: UITableViewCell {
             DetailCell.tmp = partOfSpeech
             setWordTypesColor(String(DetailCell.counter), partOfSpeech)
         }
-        definitionsLabel.text = definition
-        //exampleLabel.text = example
     }
 
+    func configureCell(_ detailEntity: DetailModel) {
+
+        let partOfSpeech = detailEntity.partOfSpeech
+        let definition = detailEntity.definitions
+        let example = detailEntity.examples
+
+        setPartOfSpeechLabel(partOfSpeech)
+        definitionsLabel.text = definition
+        setExampleLabel(example)
+    }
 }

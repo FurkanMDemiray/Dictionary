@@ -183,7 +183,7 @@
                                     <constraint firstItem="2KG-RL-ucu" firstAttribute="top" secondItem="rzT-uW-oll" secondAttribute="top" constant="16" id="tev-SN-pXo"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEi-9J-6AJ">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEi-9J-6AJ">
                                 <rect key="frame" x="0.0" y="217" width="393" height="601"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIt-ht-W5q">

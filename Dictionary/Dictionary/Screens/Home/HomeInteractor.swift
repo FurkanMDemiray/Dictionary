@@ -30,7 +30,8 @@ final class HomeInteractor {
 extension HomeInteractor: HomeInteractorProtocol {
 
     func fetchWord(word: String, completion: @escaping (Result<Word, Error>) -> Void) {
-        service.fetch(url: "https://api.dictionaryapi.dev/api/v2/entries/en/\(word)") { (result: Result<[Word], Error>) in
+        service.fetch(url: "https://api.dictionaryapi.dev/api/v2/entries/en/\(word)") { [weak self] (result: Result<[Word], Error>) in
+            guard let self else { return }
             switch result {
             case .success(let words):
                 if let word = words.first {

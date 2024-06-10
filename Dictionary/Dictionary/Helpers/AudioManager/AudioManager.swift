@@ -40,7 +40,8 @@ final class AudioManager {
         activateSession()
 
         let url = URL(string: audio)
-        let playerItem: AVPlayerItem = AVPlayerItem(url: url ?? URL(fileURLWithPath: ""))
+        guard let url else { print("Url not found!!!"); return }
+        let playerItem: AVPlayerItem = AVPlayerItem(url: url)
 
         if let player = player {
             player.replaceCurrentItem(with: playerItem)

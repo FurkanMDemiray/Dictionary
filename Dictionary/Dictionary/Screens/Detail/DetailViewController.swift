@@ -20,17 +20,17 @@ protocol DetailViewControllerProtocol: AnyObject {
 
 final class DetailViewController: UIViewController {
 
-    @IBOutlet weak var wordLabel: UILabel!
-    @IBOutlet weak var phoneticLabel: UILabel!
-    @IBOutlet weak var mainButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var nounButton: UIButton!
-    @IBOutlet weak var verbButton: UIButton!
-    @IBOutlet weak var adjectiveButton: UIButton!
-    @IBOutlet weak var volumeImage: UIImageView!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var scrollViewHeightContraint: NSLayoutConstraint!
+    @IBOutlet private weak var wordLabel: UILabel!
+    @IBOutlet private weak var phoneticLabel: UILabel!
+    @IBOutlet private weak var mainButton: UIButton!
+    @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var nounButton: UIButton!
+    @IBOutlet private weak var verbButton: UIButton!
+    @IBOutlet private weak var adjectiveButton: UIButton!
+    @IBOutlet private weak var volumeImage: UIImageView!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var scrollViewHeightContraint: NSLayoutConstraint!
 
     var presenter: DetailPresenterProtocol!
 
@@ -41,7 +41,8 @@ final class DetailViewController: UIViewController {
 
 //MARK: - Configures
     private func configureButtons() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
             for button in [self.nounButton, self.verbButton, self.adjectiveButton, self.cancelButton, self.mainButton] {
                 button?.layer.borderWidth = 1
                 button?.layer.cornerRadius = 17.5
@@ -56,7 +57,8 @@ final class DetailViewController: UIViewController {
     }
 
     private func setLabels() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
             self.wordLabel.text = self.presenter.getWordName().capitalized
             self.phoneticLabel.text = self.presenter.getWordPhonetic()
         }
@@ -75,7 +77,8 @@ final class DetailViewController: UIViewController {
     }
 
     private func configureConstraints() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
             self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
             self.scrollViewHeightContraint.constant = self.tableView.contentSize.height
         }
@@ -91,23 +94,23 @@ final class DetailViewController: UIViewController {
     }
 
 //MARK: - Actions
-    @IBAction func cancelBtnClicked(_ sender: Any) {
+    @IBAction private func cancelBtnClicked(_ sender: Any) {
         presenter.cancelBtnClicked()
     }
 
-    @IBAction func nounButtonClicked(_ sender: Any) {
+    @IBAction private func nounButtonClicked(_ sender: Any) {
         presenter.nounButtonClicked()
     }
 
-    @IBAction func verbButtonClicked(_ sender: Any) {
+    @IBAction private func verbButtonClicked(_ sender: Any) {
         presenter.verbButtonClicked()
     }
 
-    @IBAction func adjectiveButtonClicked(_ sender: Any) {
+    @IBAction private func adjectiveButtonClicked(_ sender: Any) {
         presenter.adjectiveButtonClicked()
     }
 
-    @objc func volumeImageTapped() {
+    @objc private func volumeImageTapped() {
         presenter.playSound()
     }
 }
@@ -116,13 +119,15 @@ final class DetailViewController: UIViewController {
 extension DetailViewController: DetailViewControllerProtocol {
 
     func hideSoundButton() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
             self.volumeImage.isHidden = true
         }
     }
 
     func hideSelectedButton() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
             for button in self.presenter.clickedButtons {
                 if button == "Noun" {
                     self.nounButton.isHidden = true
@@ -141,7 +146,8 @@ extension DetailViewController: DetailViewControllerProtocol {
     }
 
     func showAllButtons() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
             for button in [self.nounButton, self.verbButton, self.adjectiveButton] {
                 button?.isHidden = false
             }
@@ -149,7 +155,8 @@ extension DetailViewController: DetailViewControllerProtocol {
     }
 
     func cancelButtonClicked() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
             self.presenter.clearTitle()
             self.mainButton.isHidden = true
             self.showAllButtons()
@@ -166,7 +173,7 @@ extension DetailViewController: DetailViewControllerProtocol {
     }
 
     func updateView() {
-
+        tableView.reloadData()
     }
 
     func showError(error: Error) {
@@ -178,12 +185,12 @@ extension DetailViewController: DetailViewControllerProtocol {
 //MARK: - UITableViewDelegate, UITableViewDataSource
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.nouns.count + presenter.verbs.count + presenter.adjectives.count
+        presenter.numberOfItems
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailCell
-        cell.configureCell(partOfSpeech: presenter.partsOfSpeech[indexPath.row], definition: presenter.definitions[indexPath.row])
+        cell.configureCell(presenter.getDetailEntity()[indexPath.row])
         return cell
     }
 }

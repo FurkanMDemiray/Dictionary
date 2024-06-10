@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import AVFoundation
 
 protocol DetailInteractorProtocol {
     func playSound(_ audio: String)
