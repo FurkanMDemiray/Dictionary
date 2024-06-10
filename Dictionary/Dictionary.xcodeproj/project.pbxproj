@@ -215,12 +215,12 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
-		DD78E7412C10F41C003761FD /* Network */ = {
+		DD78E7412C10F41C003761FD /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
 				DD78E7422C10F42C003761FD /* NetworkService.swift */,
 			);
-			path = Network;
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 		DD78E7442C112916003761FD /* Extensions */ = {
@@ -263,7 +263,7 @@
 			children = (
 				DD9277852C14E78B0076C735 /* AudioManager */,
 				DD78E7442C112916003761FD /* Extensions */,
-				DD78E7412C10F41C003761FD /* Network */,
+				DD78E7412C10F41C003761FD /* NetworkManager */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";

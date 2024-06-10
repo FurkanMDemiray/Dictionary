@@ -15,7 +15,7 @@ final class DetailCell: UITableViewCell {
     @IBOutlet private weak var exampleLabel: UILabel!
 
     static var counter = 0
-    static var tmp = "Noun"
+    private static var tmp = "Noun"
 
     override func awakeFromNib() {
         super.awakeFromNib()

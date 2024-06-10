@@ -28,7 +28,7 @@ protocol DetailPresenterProtocol {
     func getWordMeanings() -> [Meaning]
     func getWordPhonetics() -> [Phonetic]
     func playSound()
-    func getTypes()
+    func setAllTypesOfWord()
     func filtering(_ type: String)
     func getDetailEntity() -> [DetailModel]
 }
@@ -55,7 +55,8 @@ final class DetailPresenter {
     private var allVerbsExamples = [String]()
     private var allAdjectivesExamples = [String]()
     private var wordTypes = [String]()
-    private var detailEntity = [DetailModel]()
+    private var originalDetailEntity = [DetailModel]()
+    private var tmpDetailEntity = [DetailModel]()
     private var filteredDetailEntity = [DetailModel]()
 
     init(view: DetailViewControllerProtocol, interactor: DetailInteractorProtocol, router: DetailRouterProtocol) {
@@ -107,8 +108,9 @@ extension DetailPresenter {
     fileprivate func setDetailEntity() {
         for i in 0..<definitions.count {
             let entity = DetailModel(partOfSpeech: partsOfSpeech[i], definitions: definitions[i], examples: examples[i])
-            detailEntity.append(entity)
+            originalDetailEntity.append(entity)
         }
+        tmpDetailEntity = originalDetailEntity
     }
 }
 
@@ -116,25 +118,36 @@ extension DetailPresenter {
 extension DetailPresenter: DetailPresenterProtocol {
 
     func getDetailEntity() -> [DetailModel] {
-        detailEntity
+        tmpDetailEntity
     }
 
     func filtering(_ type: String) {
+        title = title.filter { !$0.isWhitespace }
         filteredDetailEntity = getDetailEntity()
-        if type == "Noun" {
-            filteredDetailEntity = detailEntity.filter { $0.partOfSpeech == "Noun" }
+        if title == "Noun" {
+            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "Noun" }
         }
-        else if type == "Verb" {
-            filteredDetailEntity = detailEntity.filter { $0.partOfSpeech == "Verb" }
+        else if title == "Verb" {
+            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "Verb" }
         }
-        else if type == "Adjective" {
-            filteredDetailEntity = detailEntity.filter { $0.partOfSpeech == "Adjective" }
+        else if title == "Adjective" {
+            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "Adjective" }
         }
-        DetailCell.counter = 0
-        DetailCell.tmp = ""
-        detailEntity.removeAll()
-        detailEntity = filteredDetailEntity
-        print(detailEntity)
+        else if title.split(separator: ",").contains("Noun") && title.split(separator: ",").contains("Verb") && title.split(separator: ",").contains("Adjective") {
+            filteredDetailEntity = originalDetailEntity
+        }
+        else if title.split(separator: ",").contains("Noun") && title.split(separator: ",").contains("Verb") {
+            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "Noun" || $0.partOfSpeech == "Verb" }
+        }
+        else if title.split(separator: ",").contains("Noun") && title.split(separator: ",").contains("Adjective") {
+            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "Noun" || $0.partOfSpeech == "Adjective" }
+        }
+        else if title.split(separator: ",").contains("Verb") && title.split(separator: ",").contains("Adjective") {
+            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "Verb" || $0.partOfSpeech == "Adjective" }
+        }
+
+        tmpDetailEntity.removeAll()
+        tmpDetailEntity = filteredDetailEntity
         view.updateView()
     }
 
@@ -154,7 +167,7 @@ extension DetailPresenter: DetailPresenterProtocol {
     }
 
     var numberOfItems: Int {
-        detailEntity.count
+        tmpDetailEntity.count
     }
 
     var definitions: [String] {
@@ -171,7 +184,8 @@ extension DetailPresenter: DetailPresenterProtocol {
         wordTypes
     }
 
-    func getTypes() {
+    // Set all types of the word. First called.
+    func setAllTypesOfWord() {
         guard let meanings = word?.meanings else { return }
         for meaning in meanings {
             guard let definitions = meaning.definitions else { return }
@@ -249,6 +263,8 @@ extension DetailPresenter: DetailPresenterProtocol {
         isVerbBtnClicked = false
         isAdjectiveBtnClicked = false
         view.cancelButtonClicked()
+        tmpDetailEntity = originalDetailEntity
+        view.updateView()
     }
 
     func nounButtonClicked() {
@@ -257,7 +273,7 @@ extension DetailPresenter: DetailPresenterProtocol {
         if isFirstClicked { title += ", Noun" } else { title += "Noun"; isFirstClicked = true }
         buttonArray.append("Noun")
         view.hideSelectedButton()
-        filtering("Noun")
+        filtering(title)
     }
 
     func verbButtonClicked() {
@@ -266,7 +282,7 @@ extension DetailPresenter: DetailPresenterProtocol {
         if isFirstClicked { title += ", Verb" } else { title += "Verb"; isFirstClicked = true }
         buttonArray.append("Verb")
         view.hideSelectedButton()
-        filtering("Verb")
+        filtering(title)
     }
 
     func adjectiveButtonClicked() {
@@ -275,7 +291,7 @@ extension DetailPresenter: DetailPresenterProtocol {
         if isFirstClicked { title += ", Adjective" } else { title += "Adjective"; isFirstClicked = true }
         buttonArray.append("Adjective")
         view.hideSelectedButton()
-        filtering("Adjective")
+        filtering(title)
     }
 }
 

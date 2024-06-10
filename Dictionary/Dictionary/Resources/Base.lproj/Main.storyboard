@@ -234,6 +234,7 @@
                         <outlet property="mainButton" destination="mBw-Vo-YvP" id="1Nc-b7-UWU"/>
                         <outlet property="nounButton" destination="Svp-na-X1b" id="czE-QL-hYR"/>
                         <outlet property="phoneticLabel" destination="D0D-2f-jh9" id="yNr-9h-bzY"/>
+                        <outlet property="scrollView" destination="AEi-9J-6AJ" id="UQc-Cw-fRj"/>
                         <outlet property="scrollViewHeightContraint" destination="gYh-KJ-acE" id="Vcb-u6-qgg"/>
                         <outlet property="tableView" destination="aum-XZ-O2c" id="AiE-Df-Zfe"/>
                         <outlet property="tableViewHeightConstraint" destination="LTG-yN-1PO" id="xu6-ZV-RqL"/>

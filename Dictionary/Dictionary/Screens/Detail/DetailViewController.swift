@@ -31,6 +31,7 @@ final class DetailViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var scrollViewHeightContraint: NSLayoutConstraint!
+    @IBOutlet private weak var scrollView: UIScrollView!
 
     var presenter: DetailPresenterProtocol!
 
@@ -88,9 +89,16 @@ final class DetailViewController: UIViewController {
         configureButtons()
         setLabels()
         configureVolumeImage()
-        presenter.getTypes()
+        presenter.setAllTypesOfWord() // set all types of word
         configureTableView()
         configureConstraints()
+    }
+//MARK: Private Functions
+    fileprivate func goTopOfScrollView() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
     }
 
 //MARK: - Actions
@@ -173,7 +181,9 @@ extension DetailViewController: DetailViewControllerProtocol {
     }
 
     func updateView() {
+        DetailCell.counter = 0
         tableView.reloadData()
+        goTopOfScrollView()
     }
 
     func showError(error: Error) {
