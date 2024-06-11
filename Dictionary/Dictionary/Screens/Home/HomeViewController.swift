@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - HomeViewControllerProtocol
 protocol HomeViewControllerProtocol: AnyObject {
     func updateView()
     func showError(error: Error)
@@ -29,7 +30,6 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         presenter.viewDidLoad()
         setupFeatures()
-
     }
 
     deinit {
@@ -43,7 +43,7 @@ final class HomeViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.isScrollEnabled = false
-        tableView.register(UINib(nibName: "RecentCell", bundle: nil), forCellReuseIdentifier: "RecentCell")
+        tableView.register(UINib(nibName: CellIdentifiers.recentCell, bundle: nil), forCellReuseIdentifier: CellIdentifiers.recentCell)
     }
 
     private func configureSearchBar() {
@@ -137,7 +137,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RecentCell", for: indexPath) as! RecentCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.recentCell, for: indexPath) as! RecentCell
         cell.configure(with: presenter.recentWord(at: indexPath.row))
         return cell
     }

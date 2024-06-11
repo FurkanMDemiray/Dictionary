@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - HomePresenterProtocol
 protocol HomePresenterProtocol: AnyObject {
     var numberOfRecentWords: Int { get }
 
@@ -36,6 +37,7 @@ final class HomePresenter {
 // MARK: - HomePresenterProtocol
 extension HomePresenter: HomePresenterProtocol {
 
+//MARK: User Defaults
     func deleteRecentWord(at index: Int) {
         var recentWords = getRecentWords()
         recentWords.remove(at: index)
@@ -43,14 +45,6 @@ extension HomePresenter: HomePresenterProtocol {
         let key = "recentWords"
         userDefaults.set(recentWords, forKey: key)
         view.updateView()
-    }
-
-    func recentWord(at index: Int) -> String {
-        getRecentWords()[index]
-    }
-
-    var numberOfRecentWords: Int {
-        getRecentWords().count
     }
 
     func saveRecentWord(word: String) {
@@ -73,20 +67,6 @@ extension HomePresenter: HomePresenterProtocol {
         view.updateView()
     }
 
-    func getRecentWords() -> [String] {
-        let userDefaults = UserDefaults.standard
-        let key = "recentWords"
-        return userDefaults.stringArray(forKey: key) ?? []
-    }
-
-    func keyboardWillShow(withHeight height: CGFloat) {
-        view.adjustSearchButton(forKeyboardHeight: height)
-    }
-
-    func keyboardWillHide() {
-        view.adjustSearchButton(forKeyboardHeight: 0)
-    }
-
     func viewDidLoad() {
         view.updateView()
     }
@@ -102,19 +82,32 @@ extension HomePresenter: HomePresenterProtocol {
             }
         }
     }
+
+
+//MARK: Keyboard
+    func keyboardWillShow(withHeight height: CGFloat) {
+        view.adjustSearchButton(forKeyboardHeight: height)
+    }
+
+    func keyboardWillHide() {
+        view.adjustSearchButton(forKeyboardHeight: 0)
+    }
+
+//MARK: Getters
+    func recentWord(at index: Int) -> String {
+        getRecentWords()[index]
+    }
+    var numberOfRecentWords: Int {
+        getRecentWords().count
+    }
+    func getRecentWords() -> [String] {
+        let userDefaults = UserDefaults.standard
+        let key = "recentWords"
+        return userDefaults.stringArray(forKey: key) ?? []
+    }
 }
 
 // MARK: - HomeInteractorOutputProtocol
 extension HomePresenter: HomeInteractorOutputProtocol {
-
-    func handleWordResult(_ result: Result<Word, Error>) {
-        switch result {
-        case .success(let word):
-            //view.updateView(with: word)
-            print(word)
-        case .failure(let error):
-            view.showError(error: error)
-        }
-    }
 
 }

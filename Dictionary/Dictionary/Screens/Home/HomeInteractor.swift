@@ -12,7 +12,7 @@ protocol HomeInteractorProtocol {
 }
 
 protocol HomeInteractorOutputProtocol {
-    func handleWordResult(_ result: Result<Word, Error>)
+
 }
 
 final class HomeInteractor {
@@ -48,12 +48,5 @@ extension HomeInteractor: HomeInteractorProtocol {
 }
 
 extension HomeInteractor: HomeInteractorOutputProtocol {
-    func handleWordResult(_ result: Result<Word, Error>) {
-        switch result {
-        case .success(let word):
-            print(word)
-        case .failure(let error):
-            print(error)
-        }
-    }
+
 }

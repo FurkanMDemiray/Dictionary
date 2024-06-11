@@ -187,7 +187,7 @@
                                 <rect key="frame" x="0.0" y="217" width="393" height="601"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIt-ht-W5q">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="2000"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="2300"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aum-XZ-O2c">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="2000"/>
@@ -196,6 +196,67 @@
                                                     <constraint firstAttribute="height" constant="2000" id="LTG-yN-1PO"/>
                                                 </constraints>
                                             </tableView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fm7-L4-YHc">
+                                                <rect key="frame" x="16" y="2015.9999999999998" width="361" height="106.33333333333326"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Synoym" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYG-Sf-kgP">
+                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="21.666666666666668"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="553-G5-acK">
+                                                        <rect key="frame" x="0.0" y="29.666666666666519" width="361" height="34.333333333333343"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Dx-tc-X6S">
+                                                                <rect key="frame" x="0.0" y="0.0" width="117.66666666666667" height="34.333333333333336"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                                <connections>
+                                                                    <action selector="firstSynonmButtonClicked:" destination="1xC-bT-MKi" eventType="touchUpInside" id="tZ6-jj-3qP"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W5k-dq-8g1">
+                                                                <rect key="frame" x="121.66666666666666" y="0.0" width="117.66666666666666" height="34.333333333333336"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                                <connections>
+                                                                    <action selector="secondSynonmButtonClicked:" destination="1xC-bT-MKi" eventType="touchUpInside" id="D8Q-Yy-SDC"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKq-bE-ZnN">
+                                                                <rect key="frame" x="243.33333333333329" y="0.0" width="117.66666666666666" height="34.333333333333336"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                                <connections>
+                                                                    <action selector="thirdSynonmButtonClicked:" destination="1xC-bT-MKi" eventType="touchUpInside" id="W8H-BP-0m8"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="GMq-BG-wj3">
+                                                        <rect key="frame" x="0.0" y="72" width="361" height="34.333333333333343"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xmS-Sh-49N">
+                                                                <rect key="frame" x="0.0" y="0.0" width="178.66666666666666" height="34.333333333333336"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                                <connections>
+                                                                    <action selector="fourthSynonmButtonClicked:" destination="1xC-bT-MKi" eventType="touchUpInside" id="vnT-gQ-gwd"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ux5-5k-DoU">
+                                                                <rect key="frame" x="182.66666666666663" y="0.0" width="178.33333333333337" height="34.333333333333336"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                                <connections>
+                                                                    <action selector="fifthSynonmButtonClicked:" destination="1xC-bT-MKi" eventType="touchUpInside" id="VsX-Be-Byw"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -203,7 +264,10 @@
                                             <constraint firstAttribute="trailing" secondItem="aum-XZ-O2c" secondAttribute="trailing" id="9a3-Tj-sMV"/>
                                             <constraint firstItem="aum-XZ-O2c" firstAttribute="top" secondItem="PIt-ht-W5q" secondAttribute="top" id="Dfr-AY-7SC"/>
                                             <constraint firstItem="aum-XZ-O2c" firstAttribute="leading" secondItem="PIt-ht-W5q" secondAttribute="leading" id="JXh-1X-c5V"/>
-                                            <constraint firstAttribute="height" constant="2000" id="gYh-KJ-acE"/>
+                                            <constraint firstAttribute="height" constant="2300" id="gYh-KJ-acE"/>
+                                            <constraint firstItem="fm7-L4-YHc" firstAttribute="top" secondItem="aum-XZ-O2c" secondAttribute="bottom" constant="16" id="ggd-GB-ncG"/>
+                                            <constraint firstItem="fm7-L4-YHc" firstAttribute="leading" secondItem="PIt-ht-W5q" secondAttribute="leading" constant="16" id="szT-GE-eot"/>
+                                            <constraint firstAttribute="trailing" secondItem="fm7-L4-YHc" secondAttribute="trailing" constant="16" id="yna-99-Gqq"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -231,13 +295,20 @@
                     <connections>
                         <outlet property="adjectiveButton" destination="mrP-do-tXz" id="gVc-sN-PCp"/>
                         <outlet property="cancelButton" destination="jXh-a5-dKV" id="yix-ct-AjI"/>
+                        <outlet property="fifthSynonmButton" destination="Ux5-5k-DoU" id="G3D-s3-vDv"/>
+                        <outlet property="firstSynonmButton" destination="8Dx-tc-X6S" id="hGi-pE-Y35"/>
+                        <outlet property="fourthSynonmButton" destination="xmS-Sh-49N" id="OEs-ZY-073"/>
                         <outlet property="mainButton" destination="mBw-Vo-YvP" id="1Nc-b7-UWU"/>
                         <outlet property="nounButton" destination="Svp-na-X1b" id="czE-QL-hYR"/>
                         <outlet property="phoneticLabel" destination="D0D-2f-jh9" id="yNr-9h-bzY"/>
                         <outlet property="scrollView" destination="AEi-9J-6AJ" id="UQc-Cw-fRj"/>
                         <outlet property="scrollViewHeightContraint" destination="gYh-KJ-acE" id="Vcb-u6-qgg"/>
+                        <outlet property="secondSynonmButton" destination="W5k-dq-8g1" id="Aex-S9-xaN"/>
+                        <outlet property="synonmStackView" destination="fm7-L4-YHc" id="XWj-6P-BKs"/>
+                        <outlet property="synonmStackViewTopConstraint" destination="ggd-GB-ncG" id="yB1-QU-aIV"/>
                         <outlet property="tableView" destination="aum-XZ-O2c" id="AiE-Df-Zfe"/>
                         <outlet property="tableViewHeightConstraint" destination="LTG-yN-1PO" id="xu6-ZV-RqL"/>
+                        <outlet property="thirdSynonmButton" destination="QKq-bE-ZnN" id="uB0-Jn-mpb"/>
                         <outlet property="verbButton" destination="CJD-JU-b9Y" id="Xkf-uK-bMs"/>
                         <outlet property="volumeImage" destination="6p3-gG-FGK" id="vpb-Va-Ia8"/>
                         <outlet property="wordLabel" destination="2KG-RL-ucu" id="qgu-o6-J0V"/>

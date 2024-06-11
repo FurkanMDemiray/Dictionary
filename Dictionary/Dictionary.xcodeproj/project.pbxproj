@@ -34,6 +34,8 @@
 		DD92778B2C14F89B0076C735 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9277892C14F89B0076C735 /* DetailCell.swift */; };
 		DD92778C2C14F89B0076C735 /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD92778A2C14F89B0076C735 /* DetailCell.xib */; };
 		DD9277912C1746E40076C735 /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9277902C1746E30076C735 /* DetailModel.swift */; };
+		DD9277942C17AC040076C735 /* CellIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9277932C17AC040076C735 /* CellIdentifiers.swift */; };
+		DD9277962C18BEB10076C735 /* SynoymModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9277952C18BEB10076C735 /* SynoymModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,8 @@
 		DD9277892C14F89B0076C735 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		DD92778A2C14F89B0076C735 /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
 		DD9277902C1746E30076C735 /* DetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
+		DD9277932C17AC040076C735 /* CellIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifiers.swift; sourceTree = "<group>"; };
+		DD9277952C18BEB10076C735 /* SynoymModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynoymModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +215,7 @@
 				DD78E7522C1227CB003761FD /* DetailPresenter.swift */,
 				DD9277902C1746E30076C735 /* DetailModel.swift */,
 				DD78E7542C1227DB003761FD /* DetailRouter.swift */,
+				DD9277952C18BEB10076C735 /* SynoymModel.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -261,11 +266,20 @@
 		DD92778F2C1739E40076C735 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				DD9277922C17ABE30076C735 /* CellIdentifiers */,
 				DD9277852C14E78B0076C735 /* AudioManager */,
 				DD78E7442C112916003761FD /* Extensions */,
 				DD78E7412C10F41C003761FD /* NetworkManager */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DD9277922C17ABE30076C735 /* CellIdentifiers */ = {
+			isa = PBXGroup;
+			children = (
+				DD9277932C17AC040076C735 /* CellIdentifiers.swift */,
+			);
+			path = CellIdentifiers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,9 +428,11 @@
 				DD78E74F2C1227AA003761FD /* DetailViewController.swift in Sources */,
 				DD78E7402C10F3B1003761FD /* HomeRouter.swift in Sources */,
 				DD78E7532C1227CB003761FD /* DetailPresenter.swift in Sources */,
+				DD9277942C17AC040076C735 /* CellIdentifiers.swift in Sources */,
 				DD9277912C1746E40076C735 /* DetailModel.swift in Sources */,
 				DD78E74A2C11F6E3003761FD /* RecentCell.swift in Sources */,
 				DD78E73E2C10F3A9003761FD /* WordEntity.swift in Sources */,
+				DD9277962C18BEB10076C735 /* SynoymModel.swift in Sources */,
 				DD78E7042C10F118003761FD /* SceneDelegate.swift in Sources */,
 				DD9277872C14E79F0076C735 /* AudioManager.swift in Sources */,
 				DD78E7512C1227BE003761FD /* DetailInteractor.swift in Sources */,

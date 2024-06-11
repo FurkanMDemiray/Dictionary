@@ -36,6 +36,7 @@ protocol DetailPresenterProtocol {
 
 final class DetailPresenter {
 
+//MARK: - Variables
     weak var view: DetailViewControllerProtocol!
     var interactor: DetailInteractorProtocol
     var router: DetailRouterProtocol
@@ -117,8 +118,18 @@ extension DetailPresenter {
 // MARK: - DetailPresenterProtocol
 extension DetailPresenter: DetailPresenterProtocol {
 
-    func getDetailEntity() -> [DetailModel] {
-        tmpDetailEntity
+    func playSound() {
+        guard let firtAudio = word?.phonetics?.first?.audio else { return }
+        guard let secondAudio = word?.phonetics?.last?.audio else { return }
+
+        if firtAudio != "" {
+            interactor.playSound(firtAudio)
+        } else if secondAudio != "" {
+            interactor.playSound(secondAudio)
+        } else {
+            view.hideSoundButton()
+            print("No audio available")
+        }
     }
 
     func filtering(_ type: String) {
@@ -150,39 +161,7 @@ extension DetailPresenter: DetailPresenterProtocol {
         tmpDetailEntity = filteredDetailEntity
         view.updateView()
     }
-
-
-    func playSound() {
-        guard let firtAudio = word?.phonetics?.first?.audio else { return }
-        guard let secondAudio = word?.phonetics?.last?.audio else { return }
-
-        if firtAudio != "" {
-            interactor.playSound(firtAudio)
-        } else if secondAudio != "" {
-            interactor.playSound(secondAudio)
-        } else {
-            view.hideSoundButton()
-            print("No audio available")
-        }
-    }
-
-    var numberOfItems: Int {
-        tmpDetailEntity.count
-    }
-
-    var definitions: [String] {
-        let definitions = allNounsDefinitions + allVerbsDefinitions + allAdjectivesDefinitions
-        return definitions
-    }
-
-    var examples: [String] {
-        let examples = allNounsExamples + allVerbsExamples + allAdjectivesExamples
-        return examples
-    }
-
-    var partsOfSpeech: [String] {
-        wordTypes
-    }
+//MARK: Setters
 
     // Set all types of the word. First called.
     func setAllTypesOfWord() {
@@ -218,6 +197,33 @@ extension DetailPresenter: DetailPresenterProtocol {
         setDetailEntity()
     }
 
+    func resetFirstClicked() {
+        isFirstClicked = false
+    }
+
+    func clearTitle() {
+        title = ""
+    }
+
+//MARK: - Getters
+    var numberOfItems: Int {
+        tmpDetailEntity.count
+    }
+
+    var definitions: [String] {
+        let definitions = allNounsDefinitions + allVerbsDefinitions + allAdjectivesDefinitions
+        return definitions
+    }
+
+    var examples: [String] {
+        let examples = allNounsExamples + allVerbsExamples + allAdjectivesExamples
+        return examples
+    }
+
+    var partsOfSpeech: [String] {
+        wordTypes
+    }
+
     func getWordName() -> String {
         word?.word ?? ""
     }
@@ -234,14 +240,6 @@ extension DetailPresenter: DetailPresenterProtocol {
         word?.phonetics ?? [Phonetic]()
     }
 
-    func resetFirstClicked() {
-        isFirstClicked = false
-    }
-
-    func clearTitle() {
-        title = ""
-    }
-
     func getMainButtonTitle() -> String {
         title
     }
@@ -254,7 +252,11 @@ extension DetailPresenter: DetailPresenterProtocol {
         isCancelBtnClicked
     }
 
-//MARK: - Button Functions
+    func getDetailEntity() -> [DetailModel] {
+        tmpDetailEntity
+    }
+
+//MARK: - Button Clicked Functions
     func cancelBtnClicked() {
         view.hideCancelButton()
         buttonArray.removeAll()

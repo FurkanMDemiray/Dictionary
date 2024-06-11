@@ -32,7 +32,14 @@ final class DetailViewController: UIViewController {
     @IBOutlet private weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var scrollViewHeightContraint: NSLayoutConstraint!
     @IBOutlet private weak var scrollView: UIScrollView!
-
+    @IBOutlet private weak var firstSynonmButton: UIButton!
+    @IBOutlet private weak var secondSynonmButton: UIButton!
+    @IBOutlet private weak var thirdSynonmButton: UIButton!
+    @IBOutlet private weak var fourthSynonmButton: UIButton!
+    @IBOutlet private weak var fifthSynonmButton: UIButton!
+    @IBOutlet private weak var synonmStackView: UIStackView!
+    @IBOutlet weak var synonmStackViewTopConstraint: NSLayoutConstraint!
+    
     var presenter: DetailPresenterProtocol!
 
     override func viewDidLoad() {
@@ -44,7 +51,18 @@ final class DetailViewController: UIViewController {
     private func configureButtons() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            for button in [self.nounButton, self.verbButton, self.adjectiveButton, self.cancelButton, self.mainButton] {
+            for button in [
+                self.mainButton,
+                self.cancelButton,
+                self.nounButton,
+                self.verbButton,
+                self.adjectiveButton,
+                self.firstSynonmButton,
+                self.secondSynonmButton,
+                self.thirdSynonmButton,
+                self.fourthSynonmButton,
+                self.fifthSynonmButton
+            ] {
                 button?.layer.borderWidth = 1
                 button?.layer.cornerRadius = 17.5
                 button?.clipsToBounds = true
@@ -74,14 +92,14 @@ final class DetailViewController: UIViewController {
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "DetailCell", bundle: nil), forCellReuseIdentifier: "DetailCell")
+        tableView.register(UINib(nibName: CellIdentifiers.detailCell, bundle: nil), forCellReuseIdentifier: CellIdentifiers.detailCell)
     }
 
     private func configureConstraints() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
-            self.scrollViewHeightContraint.constant = self.tableView.contentSize.height
+            self.scrollViewHeightContraint.constant = self.tableView.contentSize.height + self.synonmStackView.frame.height + 16
         }
     }
 
@@ -93,6 +111,7 @@ final class DetailViewController: UIViewController {
         configureTableView()
         configureConstraints()
     }
+
 //MARK: Private Functions
     fileprivate func goTopOfScrollView() {
         DispatchQueue.main.async { [weak self] in
@@ -121,6 +140,27 @@ final class DetailViewController: UIViewController {
     @objc private func volumeImageTapped() {
         presenter.playSound()
     }
+
+    @IBAction func firstSynonmButtonClicked(_ sender: Any) {
+
+    }
+
+    @IBAction func secondSynonmButtonClicked(_ sender: Any) {
+
+    }
+
+    @IBAction func thirdSynonmButtonClicked(_ sender: Any) {
+
+    }
+
+    @IBAction func fourthSynonmButtonClicked(_ sender: Any) {
+
+    }
+
+    @IBAction func fifthSynonmButtonClicked(_ sender: Any) {
+
+    }
+
 }
 
 //MARK: - DetailViewControllerProtocol
@@ -183,6 +223,10 @@ extension DetailViewController: DetailViewControllerProtocol {
     func updateView() {
         DetailCell.counter = 0
         tableView.reloadData()
+        //configureConstraints()
+        //synonmStackView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 16).isActive = true
+        //scrollViewHeightContraint.constant = tableView.contentSize.height + synonmStackView.frame.height + 16
+
         goTopOfScrollView()
     }
 
@@ -191,7 +235,6 @@ extension DetailViewController: DetailViewControllerProtocol {
     }
 }
 
-
 //MARK: - UITableViewDelegate, UITableViewDataSource
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -199,7 +242,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.detailCell, for: indexPath) as! DetailCell
         cell.configureCell(presenter.getDetailEntity()[indexPath.row])
         return cell
     }
