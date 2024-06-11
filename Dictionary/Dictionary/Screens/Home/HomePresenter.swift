@@ -97,11 +97,8 @@ extension HomePresenter: HomePresenterProtocol {
     }
 
     func searchButtonTapped(word: String) {
-        //fetchSynonyms(word: word, source: <#Word#>)
         fetchWord(word: word)
-        //print("Synonyms: \(HomePresenter.synoyms)")
     }
-
 
 //MARK: Keyboard
     func keyboardWillShow(withHeight height: CGFloat) {

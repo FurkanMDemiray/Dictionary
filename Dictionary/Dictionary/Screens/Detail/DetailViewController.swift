@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - DetailViewControllerProtocol
 protocol DetailViewControllerProtocol: AnyObject {
     func updateView()
     func showError(error: Error)
@@ -134,6 +135,11 @@ final class DetailViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             let synonyms = self.presenter.getSynonyms()
+            if synonyms.count == 0 {
+                self.synonmStackView.isHidden = true
+                self.synonmStackViewTopConstraint.constant = 0
+                return
+            }
             self.firstSynonmButton.setTitle(synonyms[0], for: .normal)
             self.secondSynonmButton.setTitle(synonyms[1], for: .normal)
             self.thirdSynonmButton.setTitle(synonyms[2], for: .normal)

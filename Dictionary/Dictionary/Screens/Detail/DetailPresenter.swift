@@ -164,8 +164,8 @@ extension DetailPresenter: DetailPresenterProtocol {
         tmpDetailEntity = filteredDetailEntity
         view.updateView()
     }
-//MARK: Setters
 
+//MARK: Setters
     // Set all types of the word. First called.
     func setAllTypesOfWord() {
         guard let meanings = word?.meanings else { return }
@@ -209,7 +209,6 @@ extension DetailPresenter: DetailPresenterProtocol {
     }
 
 //MARK: - Getters
-
     func getSynonyms() -> [String] {
         tmpSynonyms = self.synonyms?.prefix(5).map { $0.word } as! [String]
         return tmpSynonyms
