@@ -39,7 +39,7 @@ final class DetailViewController: UIViewController {
     @IBOutlet private weak var fifthSynonmButton: UIButton!
     @IBOutlet private weak var synonmStackView: UIStackView!
     @IBOutlet weak var synonmStackViewTopConstraint: NSLayoutConstraint!
-    
+
     var presenter: DetailPresenterProtocol!
 
     override func viewDidLoad() {
@@ -110,6 +110,7 @@ final class DetailViewController: UIViewController {
         presenter.setAllTypesOfWord() // set all types of word
         configureTableView()
         configureConstraints()
+        setSynonyms()
     }
 
 //MARK: Private Functions
@@ -117,6 +118,27 @@ final class DetailViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
+    }
+
+    fileprivate func updateContsraints() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in
+            guard let self else { return }
+            tableViewHeightConstraint.constant = tableView.contentSize.height
+            scrollViewHeightContraint.constant = tableView.contentSize.height + synonmStackView.frame.height + 16
+            print("tableView.contentSize.height: \(tableView.contentSize.height) tableView.frame.height: \(tableView.frame.height) tableView.constant: \(tableViewHeightConstraint.constant)")
+        }
+    }
+
+    fileprivate func setSynonyms() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            let synonyms = self.presenter.getSynonyms()
+            self.firstSynonmButton.setTitle(synonyms[0], for: .normal)
+            self.secondSynonmButton.setTitle(synonyms[1], for: .normal)
+            self.thirdSynonmButton.setTitle(synonyms[2], for: .normal)
+            self.fourthSynonmButton.setTitle(synonyms[3], for: .normal)
+            self.fifthSynonmButton.setTitle(synonyms[4], for: .normal)
         }
     }
 
@@ -223,10 +245,7 @@ extension DetailViewController: DetailViewControllerProtocol {
     func updateView() {
         DetailCell.counter = 0
         tableView.reloadData()
-        //configureConstraints()
-        //synonmStackView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 16).isActive = true
-        //scrollViewHeightContraint.constant = tableView.contentSize.height + synonmStackView.frame.height + 16
-
+        updateContsraints()
         goTopOfScrollView()
     }
 

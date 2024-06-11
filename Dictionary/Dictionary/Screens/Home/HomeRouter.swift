@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 enum HomeRoutes {
-    case detail(source: Word?)
+    case detail(word: Word?, synonyms: [SynoymModel]?)
 }
 
 protocol HomeRouterProtocol {
@@ -41,9 +41,10 @@ final class HomeRouter {
 extension HomeRouter: HomeRouterProtocol {
     func navigateToWordDetail(_ route: HomeRoutes) {
         switch route {
-        case .detail(let source):
-            guard let source else { return }
-            let detailViewController = DetailRouter.createDetailModule(source)
+        case .detail(let word, let synonyms):
+            guard let word else { return }
+            guard let synonyms else { return }
+            let detailViewController = DetailRouter.createDetailModule(word: word, synonyms: synonyms)
             viewController?.navigationController?.pushViewController(detailViewController, animated: true)
         }
     }

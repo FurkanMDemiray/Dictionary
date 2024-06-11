@@ -31,6 +31,7 @@ protocol DetailPresenterProtocol {
     func setAllTypesOfWord()
     func filtering(_ type: String)
     func getDetailEntity() -> [DetailModel]
+    func getSynonyms() -> [String]
 }
 
 
@@ -41,6 +42,7 @@ final class DetailPresenter {
     var interactor: DetailInteractorProtocol
     var router: DetailRouterProtocol
     var word: Word?
+    var synonyms: [SynoymModel]?
 
     private var buttonArray = [String]()
     private var isCancelBtnClicked = false
@@ -59,6 +61,7 @@ final class DetailPresenter {
     private var originalDetailEntity = [DetailModel]()
     private var tmpDetailEntity = [DetailModel]()
     private var filteredDetailEntity = [DetailModel]()
+    private var tmpSynonyms = [String]()
 
     init(view: DetailViewControllerProtocol, interactor: DetailInteractorProtocol, router: DetailRouterProtocol) {
         self.interactor = interactor
@@ -206,6 +209,12 @@ extension DetailPresenter: DetailPresenterProtocol {
     }
 
 //MARK: - Getters
+
+    func getSynonyms() -> [String] {
+        tmpSynonyms = self.synonyms?.prefix(5).map { $0.word } as! [String]
+        return tmpSynonyms
+    }
+
     var numberOfItems: Int {
         tmpDetailEntity.count
     }

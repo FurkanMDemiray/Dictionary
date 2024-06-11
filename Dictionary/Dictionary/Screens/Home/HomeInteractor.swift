@@ -9,6 +9,7 @@ import Foundation
 
 protocol HomeInteractorProtocol {
     func fetchWord(word: String, completion: @escaping (Result<Word, Error>) -> Void)
+    func fetchWordSynonyms(word: String, completion: @escaping (Result<[SynoymModel], Error>) -> Void)
 }
 
 protocol HomeInteractorOutputProtocol {
@@ -28,6 +29,17 @@ final class HomeInteractor {
 }
 
 extension HomeInteractor: HomeInteractorProtocol {
+    func fetchWordSynonyms(word: String, completion: @escaping (Result<[SynoymModel], any Error>) -> Void) {
+        service.fetch(url: "https://api.datamuse.com/words?rel_syn=\(word)") { [weak self] (result: Result<[SynoymModel], Error>) in
+            guard let self else { return }
+            switch result {
+            case .success(let synonyms):
+                completion(.success(synonyms))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 
     func fetchWord(word: String, completion: @escaping (Result<Word, Error>) -> Void) {
         service.fetch(url: "https://api.dictionaryapi.dev/api/v2/entries/en/\(word)") { [weak self] (result: Result<[Word], Error>) in

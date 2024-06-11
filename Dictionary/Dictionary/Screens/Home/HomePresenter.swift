@@ -32,6 +32,31 @@ final class HomePresenter {
         self.router = router
         self.interactor = interactor
     }
+
+//MARK: Private Functions
+    fileprivate func fetchWord(word: String) {
+        interactor.fetchWord(word: word) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let result):
+                fetchSynonyms(word: word, wordModel: result)
+            case .failure(let error):
+                self.view.showError(error: error)
+            }
+        }
+    }
+
+    fileprivate func fetchSynonyms(word: String, wordModel: Word) {
+        interactor.fetchWordSynonyms(word: word) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let synonyms):
+                self.router.navigateToWordDetail(.detail(word: wordModel, synonyms: synonyms))
+            case .failure(let error):
+                self.view.showError(error: error)
+            }
+        }
+    }
 }
 
 // MARK: - HomePresenterProtocol
@@ -72,15 +97,9 @@ extension HomePresenter: HomePresenterProtocol {
     }
 
     func searchButtonTapped(word: String) {
-        interactor.fetchWord(word: word) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let word):
-                self.router.navigateToWordDetail(.detail(source: word))
-            case .failure(let error):
-                self.view.showError(error: error)
-            }
-        }
+        //fetchSynonyms(word: word, source: <#Word#>)
+        fetchWord(word: word)
+        //print("Synonyms: \(HomePresenter.synoyms)")
     }
 
 
