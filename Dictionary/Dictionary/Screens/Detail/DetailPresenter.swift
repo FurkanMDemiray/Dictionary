@@ -122,13 +122,16 @@ extension DetailPresenter {
 extension DetailPresenter: DetailPresenterProtocol {
 
     func playSound() {
-        guard let firtAudio = word?.phonetics?.first?.audio else { return }
-        guard let secondAudio = word?.phonetics?.last?.audio else { return }
+        let audios = word?.phonetics?.prefix(5).map { $0.audio }
+        guard let audios else { return }
 
-        if firtAudio != "" {
-            interactor.playSound(firtAudio)
-        } else if secondAudio != "" {
-            interactor.playSound(secondAudio)
+        var realAudio: String?
+        for audio in audios {
+            audio != "" ? realAudio = audio: nil
+        }
+
+        if let realAudio {
+            interactor.playSound(realAudio)
         } else {
             view.hideSoundButton()
             print("No audio available")
