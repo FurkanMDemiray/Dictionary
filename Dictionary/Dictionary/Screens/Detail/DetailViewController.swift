@@ -127,7 +127,6 @@ final class DetailViewController: UIViewController {
             guard let self else { return }
             tableViewHeightConstraint.constant = tableView.contentSize.height
             scrollViewHeightContraint.constant = tableView.contentSize.height + synonmStackView.frame.height + 16
-            print("tableView.contentSize.height: \(tableView.contentSize.height) tableView.frame.height: \(tableView.frame.height) tableView.constant: \(tableViewHeightConstraint.constant)")
         }
     }
 
@@ -170,23 +169,23 @@ final class DetailViewController: UIViewController {
     }
 
     @IBAction func firstSynonmButtonClicked(_ sender: Any) {
-
+        presenter.synonmButtonClick(word: firstSynonmButton.currentTitle ?? "")
     }
 
     @IBAction func secondSynonmButtonClicked(_ sender: Any) {
-
+        presenter.synonmButtonClick(word: firstSynonmButton.currentTitle ?? "")
     }
 
     @IBAction func thirdSynonmButtonClicked(_ sender: Any) {
-
+        presenter.synonmButtonClick(word: firstSynonmButton.currentTitle ?? "")
     }
 
     @IBAction func fourthSynonmButtonClicked(_ sender: Any) {
-
+        presenter.synonmButtonClick(word: firstSynonmButton.currentTitle ?? "")
     }
 
     @IBAction func fifthSynonmButtonClicked(_ sender: Any) {
-
+        presenter.synonmButtonClick(word: firstSynonmButton.currentTitle ?? "")
     }
 
 }

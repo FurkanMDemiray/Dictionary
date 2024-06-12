@@ -32,6 +32,7 @@ protocol DetailPresenterProtocol {
     func filtering(_ type: String)
     func getDetailEntity() -> [DetailModel]
     func getSynonyms() -> [String]
+    func synonmButtonClick(word: String)
 }
 
 
@@ -116,10 +117,38 @@ extension DetailPresenter {
         }
         tmpDetailEntity = originalDetailEntity
     }
+
+    fileprivate func fetchWord(word: String) {
+        interactor.fetchWord(word: word) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let result):
+                fetchSynonyms(word: word, wordModel: result)
+            case .failure(let error):
+                self.view.showError(error: error)
+            }
+        }
+    }
+
+    fileprivate func fetchSynonyms(word: String, wordModel: Word) {
+        interactor.fetchWordSynonyms(word: word) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let synonyms):
+                self.router.navigateToWordDetail(.detail(word: wordModel, synonyms: synonyms))
+            case .failure(let error):
+                self.view.showError(error: error)
+            }
+        }
+    }
 }
 
 // MARK: - DetailPresenterProtocol
 extension DetailPresenter: DetailPresenterProtocol {
+
+    func synonmButtonClick(word: String) {
+        fetchWord(word: word)
+    }
 
     func playSound() {
         let audios = word?.phonetics?.prefix(5).map { $0.audio }
@@ -127,7 +156,7 @@ extension DetailPresenter: DetailPresenterProtocol {
 
         var realAudio: String?
         for audio in audios {
-            audio != "" ? realAudio = audio: nil
+            audio != "" ? realAudio = audio: view.hideSoundButton()
         }
 
         if let realAudio {
