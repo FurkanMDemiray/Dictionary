@@ -156,11 +156,11 @@ extension DetailPresenter: DetailPresenterProtocol {
 
         var realAudio: String?
         for audio in audios {
-            audio != "" ? realAudio = audio: view.hideSoundButton()
+            audio != "" ? realAudio = audio: nil
         }
 
-        if let realAudio {
-            interactor.playSound(realAudio)
+        if realAudio != "" && realAudio != nil {
+            interactor.playSound(realAudio!)
         } else {
             view.hideSoundButton()
             print("No audio available")

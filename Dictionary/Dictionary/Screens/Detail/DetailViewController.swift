@@ -173,19 +173,19 @@ final class DetailViewController: UIViewController {
     }
 
     @IBAction func secondSynonmButtonClicked(_ sender: Any) {
-        presenter.synonmButtonClick(word: firstSynonmButton.currentTitle ?? "")
+        presenter.synonmButtonClick(word: secondSynonmButton.currentTitle ?? "")
     }
 
     @IBAction func thirdSynonmButtonClicked(_ sender: Any) {
-        presenter.synonmButtonClick(word: firstSynonmButton.currentTitle ?? "")
+        presenter.synonmButtonClick(word: thirdSynonmButton.currentTitle ?? "")
     }
 
     @IBAction func fourthSynonmButtonClicked(_ sender: Any) {
-        presenter.synonmButtonClick(word: firstSynonmButton.currentTitle ?? "")
+        presenter.synonmButtonClick(word: fourthSynonmButton.currentTitle ?? "")
     }
 
     @IBAction func fifthSynonmButtonClicked(_ sender: Any) {
-        presenter.synonmButtonClick(word: firstSynonmButton.currentTitle ?? "")
+        presenter.synonmButtonClick(word: fifthSynonmButton.currentTitle ?? "")
     }
 
 }
