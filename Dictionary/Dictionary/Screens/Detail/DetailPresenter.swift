@@ -10,9 +10,6 @@ import Foundation
 // MARK: - DetailPresenterProtocol
 protocol DetailPresenterProtocol {
     var clickedButtons: [String] { get }
-    var partsOfSpeech: [String] { get }
-    var definitions: [String] { get }
-    var examples: [String] { get }
     var numberOfItems: Int { get }
 
     func cancelBtnClicked()
@@ -58,7 +55,9 @@ final class DetailPresenter {
     private var allNounsExamples = [String]()
     private var allVerbsExamples = [String]()
     private var allAdjectivesExamples = [String]()
-    private var wordTypes = [String]()
+    private var parthOfSpeechs = [String]()
+    private var definitions = [String]()
+    private var examples = [String]()
     private var originalDetailEntity = [DetailModel]()
     private var tmpDetailEntity = [DetailModel]()
     private var filteredDetailEntity = [DetailModel]()
@@ -74,6 +73,7 @@ final class DetailPresenter {
 
 // MARK: - Private Functions
 extension DetailPresenter {
+
     fileprivate func addToClickedButtons(_ buttons: String) {
         if buttons == "Noun" {
             buttonArray.append("Noun")
@@ -98,26 +98,37 @@ extension DetailPresenter {
         }
     }
 
+    fileprivate func setDefinitions() {
+        definitions = allNounsDefinitions + allVerbsDefinitions + allAdjectivesDefinitions
+    }
+
+    fileprivate func setExamples() {
+        examples = allNounsExamples + allVerbsExamples + allAdjectivesExamples
+    }
+
     fileprivate func appendWordTypes() {
         for _ in 0..<allNounsDefinitions.count {
-            wordTypes.append("Noun")
+            parthOfSpeechs.append("Noun")
         }
         for _ in 0..<allVerbsDefinitions.count {
-            wordTypes.append("Verb")
+            parthOfSpeechs.append("Verb")
         }
         for _ in 0..<allAdjectivesDefinitions.count {
-            wordTypes.append("Adjective")
+            parthOfSpeechs.append("Adjective")
         }
     }
 
     fileprivate func setDetailEntity() {
+        setDefinitions()
+        setExamples()
         for i in 0..<definitions.count {
-            let entity = DetailModel(partOfSpeech: partsOfSpeech[i], definitions: definitions[i], examples: examples[i])
+            let entity = DetailModel(partOfSpeech: parthOfSpeechs[i], definitions: definitions[i], examples: examples[i])
             originalDetailEntity.append(entity)
         }
         tmpDetailEntity = originalDetailEntity
     }
 
+//MARK: - Fetch Functions
     fileprivate func fetchWord(word: String) {
         interactor.fetchWord(word: word) { [weak self] result in
             guard let self = self else { return }
@@ -151,12 +162,15 @@ extension DetailPresenter: DetailPresenterProtocol {
     }
 
     func playSound() {
-        let audios = word?.phonetics?.prefix(5).map { $0.audio }
+        let audios = word?.phonetics?.prefix(15).map { $0.audio }
         guard let audios else { return }
 
         var realAudio: String?
         for audio in audios {
-            audio != "" ? realAudio = audio: nil
+            guard let audio else { return }
+            if audio.suffix(4) == ".mp3" {
+                audio != "" ? realAudio = audio: nil
+            }
         }
 
         if realAudio != "" && realAudio != nil {
@@ -165,6 +179,7 @@ extension DetailPresenter: DetailPresenterProtocol {
             view.hideSoundButton()
             print("No audio available")
         }
+        print("Audio: \(realAudio ?? "")")
     }
 
     func filtering(_ type: String) {
@@ -248,20 +263,6 @@ extension DetailPresenter: DetailPresenterProtocol {
 
     var numberOfItems: Int {
         tmpDetailEntity.count
-    }
-
-    var definitions: [String] {
-        let definitions = allNounsDefinitions + allVerbsDefinitions + allAdjectivesDefinitions
-        return definitions
-    }
-
-    var examples: [String] {
-        let examples = allNounsExamples + allVerbsExamples + allAdjectivesExamples
-        return examples
-    }
-
-    var partsOfSpeech: [String] {
-        wordTypes
     }
 
     func getWordName() -> String {
