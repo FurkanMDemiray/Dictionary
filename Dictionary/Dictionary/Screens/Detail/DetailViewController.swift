@@ -17,6 +17,7 @@ protocol DetailViewControllerProtocol: AnyObject {
     func hideSelectedButton()
     func showAllButtons()
     func hideSoundButton()
+    func resetSoundImageTintColor()
 }
 
 final class DetailViewController: UIViewController {
@@ -28,7 +29,7 @@ final class DetailViewController: UIViewController {
     @IBOutlet private weak var nounButton: UIButton!
     @IBOutlet private weak var verbButton: UIButton!
     @IBOutlet private weak var adjectiveButton: UIButton!
-    @IBOutlet private weak var volumeImage: UIImageView!
+    @IBOutlet private weak var soundImage: UIImageView!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var scrollViewHeightContraint: NSLayoutConstraint!
@@ -85,9 +86,9 @@ final class DetailViewController: UIViewController {
     }
 
     private func configureVolumeImage() {
-        volumeImage.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(volumeImageTapped))
-        volumeImage.addGestureRecognizer(tap)
+        soundImage.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(soundImageTapped))
+        soundImage.addGestureRecognizer(tap)
     }
 
     private func configureTableView() {
@@ -164,7 +165,8 @@ final class DetailViewController: UIViewController {
         presenter.adjectiveButtonClicked()
     }
 
-    @objc private func volumeImageTapped() {
+    @objc private func soundImageTapped() {
+        soundImage.tintColor = .systemBlue
         presenter.playSound()
     }
 
@@ -193,10 +195,39 @@ final class DetailViewController: UIViewController {
 //MARK: - DetailViewControllerProtocol
 extension DetailViewController: DetailViewControllerProtocol {
 
+    func resetSoundImageTintColor() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            guard let self else { return }
+            soundImage.tintColor = .black
+        }
+    }
+
+//MARK: - Show Functions
+    func showError(error: Error) {
+
+    }
+
+    func showCancelButton() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            cancelButton.isHidden = false
+        }
+    }
+
+    func showAllButtons() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            for button in [self.nounButton, self.verbButton, self.adjectiveButton] {
+                button?.isHidden = false
+            }
+        }
+    }
+
+//MARK: Hide Functions
     func hideSoundButton() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            self.volumeImage.isHidden = true
+            self.soundImage.isHidden = true
         }
     }
 
@@ -220,12 +251,10 @@ extension DetailViewController: DetailViewControllerProtocol {
         }
     }
 
-    func showAllButtons() {
+    func hideCancelButton() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            for button in [self.nounButton, self.verbButton, self.adjectiveButton] {
-                button?.isHidden = false
-            }
+            cancelButton.isHidden = true
         }
     }
 
@@ -239,14 +268,6 @@ extension DetailViewController: DetailViewControllerProtocol {
         }
     }
 
-    func hideCancelButton() {
-        cancelButton.isHidden = true
-    }
-
-    func showCancelButton() {
-        cancelButton.isHidden = false
-    }
-
     func updateView() {
         DetailCell.counter = 0
         tableView.reloadData()
@@ -254,9 +275,6 @@ extension DetailViewController: DetailViewControllerProtocol {
         goTopOfScrollView()
     }
 
-    func showError(error: Error) {
-
-    }
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource

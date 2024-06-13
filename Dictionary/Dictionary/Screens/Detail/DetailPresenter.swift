@@ -55,6 +55,9 @@ final class DetailPresenter {
     private var allNounsExamples = [String]()
     private var allVerbsExamples = [String]()
     private var allAdjectivesExamples = [String]()
+    private var firstParthOfSpeech = ""
+    private var secondParthOfSpeech = ""
+    private var thirdParthOfSpeech = ""
     private var parthOfSpeechs = [String]()
     private var definitions = [String]()
     private var examples = [String]()
@@ -73,6 +76,22 @@ final class DetailPresenter {
 
 // MARK: - Private Functions
 extension DetailPresenter {
+
+    fileprivate func setThreePartOfSpeech() {
+        guard let meanings = word?.meanings else { return }
+        for meaning in meanings {
+            if firstParthOfSpeech == "" {
+                firstParthOfSpeech = meaning.partOfSpeech ?? ""
+            }
+            else if secondParthOfSpeech == "" {
+                secondParthOfSpeech = meaning.partOfSpeech ?? ""
+            }
+            else if thirdParthOfSpeech == "" {
+                thirdParthOfSpeech = meaning.partOfSpeech ?? ""
+            }
+        }
+        print("First: \(firstParthOfSpeech), Second: \(secondParthOfSpeech), Third: \(thirdParthOfSpeech)")
+    }
 
     fileprivate func addToClickedButtons(_ buttons: String) {
         if buttons == "Noun" {
@@ -179,7 +198,7 @@ extension DetailPresenter: DetailPresenterProtocol {
             view.hideSoundButton()
             print("No audio available")
         }
-        print("Audio: \(realAudio ?? "")")
+        view.resetSoundImageTintColor()
     }
 
     func filtering(_ type: String) {
@@ -215,6 +234,7 @@ extension DetailPresenter: DetailPresenterProtocol {
 //MARK: Setters
     // Set all types of the word. First called.
     func setAllTypesOfWord() {
+        setThreePartOfSpeech()
         guard let meanings = word?.meanings else { return }
         for meaning in meanings {
             guard let definitions = meaning.definitions else { return }

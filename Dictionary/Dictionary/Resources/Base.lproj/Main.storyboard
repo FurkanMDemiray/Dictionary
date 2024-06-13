@@ -304,13 +304,13 @@
                         <outlet property="scrollView" destination="AEi-9J-6AJ" id="UQc-Cw-fRj"/>
                         <outlet property="scrollViewHeightContraint" destination="gYh-KJ-acE" id="Vcb-u6-qgg"/>
                         <outlet property="secondSynonmButton" destination="W5k-dq-8g1" id="Aex-S9-xaN"/>
+                        <outlet property="soundImage" destination="6p3-gG-FGK" id="vpb-Va-Ia8"/>
                         <outlet property="synonmStackView" destination="fm7-L4-YHc" id="XWj-6P-BKs"/>
                         <outlet property="synonmStackViewTopConstraint" destination="ggd-GB-ncG" id="yB1-QU-aIV"/>
                         <outlet property="tableView" destination="aum-XZ-O2c" id="AiE-Df-Zfe"/>
                         <outlet property="tableViewHeightConstraint" destination="LTG-yN-1PO" id="xu6-ZV-RqL"/>
                         <outlet property="thirdSynonmButton" destination="QKq-bE-ZnN" id="uB0-Jn-mpb"/>
                         <outlet property="verbButton" destination="CJD-JU-b9Y" id="Xkf-uK-bMs"/>
-                        <outlet property="volumeImage" destination="6p3-gG-FGK" id="vpb-Va-Ia8"/>
                         <outlet property="wordLabel" destination="2KG-RL-ucu" id="qgu-o6-J0V"/>
                     </connections>
                 </viewController>
