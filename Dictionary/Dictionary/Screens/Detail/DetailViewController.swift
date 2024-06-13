@@ -18,6 +18,7 @@ protocol DetailViewControllerProtocol: AnyObject {
     func showAllButtons()
     func hideSoundButton()
     func resetSoundImageTintColor()
+    func setButtonNames(names: [String])
 }
 
 final class DetailViewController: UIViewController {
@@ -195,6 +196,15 @@ final class DetailViewController: UIViewController {
 //MARK: - DetailViewControllerProtocol
 extension DetailViewController: DetailViewControllerProtocol {
 
+    func setButtonNames(names: [String]) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.nounButton.setTitle(names[0], for: .normal)
+            self.verbButton.setTitle(names[1], for: .normal)
+            self.adjectiveButton.setTitle(names[2], for: .normal)
+        }
+    }
+
     func resetSoundImageTintColor() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
             guard let self else { return }
@@ -235,13 +245,13 @@ extension DetailViewController: DetailViewControllerProtocol {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             for button in self.presenter.clickedButtons {
-                if button == "Noun" {
+                if button == presenter.firstButtoName {
                     self.nounButton.isHidden = true
                 }
-                else if button == "Verb" {
+                else if button == presenter.secondButtoName {
                     self.verbButton.isHidden = true
                 }
-                else if button == "Adjective" {
+                else if button == presenter.thirdButtoName {
                     self.adjectiveButton.isHidden = true
                 }
             }

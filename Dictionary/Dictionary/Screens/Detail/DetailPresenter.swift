@@ -11,6 +11,9 @@ import Foundation
 protocol DetailPresenterProtocol {
     var clickedButtons: [String] { get }
     var numberOfItems: Int { get }
+    var firstButtoName: String { get }
+    var secondButtoName: String { get }
+    var thirdButtoName: String { get }
 
     func cancelBtnClicked()
     func nounButtonClicked()
@@ -91,29 +94,31 @@ extension DetailPresenter {
             }
         }
         print("First: \(firstParthOfSpeech), Second: \(secondParthOfSpeech), Third: \(thirdParthOfSpeech)")
+        let names = [firstParthOfSpeech, secondParthOfSpeech, thirdParthOfSpeech]
+        view.setButtonNames(names: names)
     }
 
     fileprivate func addToClickedButtons(_ buttons: String) {
-        if buttons == "Noun" {
-            buttonArray.append("Noun")
+        if buttons == firstParthOfSpeech {
+            buttonArray.append(firstParthOfSpeech)
         }
-        else if buttons == "Verb" {
-            buttonArray.append("Verb")
+        else if buttons == secondParthOfSpeech {
+            buttonArray.append(secondParthOfSpeech)
         }
-        else if buttons == "Adjective" {
-            buttonArray.append("Adjective")
+        else if buttons == thirdParthOfSpeech {
+            buttonArray.append(thirdParthOfSpeech)
         }
     }
 
     fileprivate func removeFromClickedButtons(_ buttons: String) {
-        if buttons == "Noun" {
-            buttonArray.removeAll { $0 == "Noun" }
+        if buttons == firstParthOfSpeech {
+            buttonArray.removeAll { $0 == firstParthOfSpeech }
         }
-        else if buttons == "Verb" {
-            buttonArray.removeAll { $0 == "Verb" }
+        else if buttons == secondParthOfSpeech {
+            buttonArray.removeAll { $0 == secondParthOfSpeech }
         }
-        else if buttons == "Adjective" {
-            buttonArray.removeAll { $0 == "Adjective" }
+        else if buttons == thirdParthOfSpeech {
+            buttonArray.removeAll { $0 == thirdParthOfSpeech }
         }
     }
 
@@ -127,13 +132,13 @@ extension DetailPresenter {
 
     fileprivate func appendWordTypes() {
         for _ in 0..<allNounsDefinitions.count {
-            parthOfSpeechs.append("Noun")
+            parthOfSpeechs.append(firstParthOfSpeech)
         }
         for _ in 0..<allVerbsDefinitions.count {
-            parthOfSpeechs.append("Verb")
+            parthOfSpeechs.append(secondParthOfSpeech)
         }
         for _ in 0..<allAdjectivesDefinitions.count {
-            parthOfSpeechs.append("Adjective")
+            parthOfSpeechs.append(thirdParthOfSpeech)
         }
     }
 
@@ -176,6 +181,19 @@ extension DetailPresenter {
 // MARK: - DetailPresenterProtocol
 extension DetailPresenter: DetailPresenterProtocol {
 
+    var firstButtoName: String {
+        firstParthOfSpeech
+    }
+
+    var secondButtoName: String {
+        secondParthOfSpeech
+    }
+
+    var thirdButtoName: String {
+        thirdParthOfSpeech
+    }
+
+
     func synonmButtonClick(word: String) {
         fetchWord(word: word)
     }
@@ -204,26 +222,26 @@ extension DetailPresenter: DetailPresenterProtocol {
     func filtering(_ type: String) {
         title = title.filter { !$0.isWhitespace }
         filteredDetailEntity = getDetailEntity()
-        if title == "Noun" {
-            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "Noun" }
+        if title == firstParthOfSpeech {
+            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == firstParthOfSpeech }
         }
-        else if title == "Verb" {
-            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "Verb" }
+        else if title == secondParthOfSpeech {
+            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == secondParthOfSpeech }
         }
-        else if title == "Adjective" {
-            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "Adjective" }
+        else if title == thirdParthOfSpeech {
+            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == thirdParthOfSpeech }
         }
-        else if title.split(separator: ",").contains("Noun") && title.split(separator: ",").contains("Verb") && title.split(separator: ",").contains("Adjective") {
+        else if title.split(separator: ",").contains("\(firstParthOfSpeech)") && title.split(separator: ",").contains("\(secondParthOfSpeech)") && title.split(separator: ",").contains("\(thirdParthOfSpeech)") {
             filteredDetailEntity = originalDetailEntity
         }
-        else if title.split(separator: ",").contains("Noun") && title.split(separator: ",").contains("Verb") {
-            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "Noun" || $0.partOfSpeech == "Verb" }
+        else if title.split(separator: ",").contains("\(firstParthOfSpeech)") && title.split(separator: ",").contains("\(secondParthOfSpeech)") {
+            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "\(firstParthOfSpeech)" || $0.partOfSpeech == "\(secondParthOfSpeech)" }
         }
-        else if title.split(separator: ",").contains("Noun") && title.split(separator: ",").contains("Adjective") {
-            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "Noun" || $0.partOfSpeech == "Adjective" }
+        else if title.split(separator: ",").contains("\(firstParthOfSpeech)") && title.split(separator: ",").contains("\(thirdParthOfSpeech)") {
+            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "\(firstParthOfSpeech)" || $0.partOfSpeech == "\(thirdParthOfSpeech)" }
         }
-        else if title.split(separator: ",").contains("Verb") && title.split(separator: ",").contains("Adjective") {
-            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "Verb" || $0.partOfSpeech == "Adjective" }
+        else if title.split(separator: ",").contains("\(secondParthOfSpeech)") && title.split(separator: ",").contains("\(thirdParthOfSpeech)") {
+            filteredDetailEntity = originalDetailEntity.filter { $0.partOfSpeech == "\(secondParthOfSpeech)" || $0.partOfSpeech == "\(thirdParthOfSpeech)" }
         }
 
         tmpDetailEntity.removeAll()
@@ -238,7 +256,7 @@ extension DetailPresenter: DetailPresenterProtocol {
         guard let meanings = word?.meanings else { return }
         for meaning in meanings {
             guard let definitions = meaning.definitions else { return }
-            if meaning.partOfSpeech == "noun" {
+            if meaning.partOfSpeech == firstParthOfSpeech {
                 for definition in definitions {
                     allNounsDefinitions.append(definition.definition ?? "")
                 }
@@ -246,7 +264,7 @@ extension DetailPresenter: DetailPresenterProtocol {
                     allNounsExamples.append(example.example ?? "")
                 }
             }
-            else if meaning.partOfSpeech == "verb" {
+            else if meaning.partOfSpeech == secondParthOfSpeech {
                 for definition in definitions {
                     allVerbsDefinitions.append(definition.definition ?? "")
                 }
@@ -254,7 +272,7 @@ extension DetailPresenter: DetailPresenterProtocol {
                     allVerbsExamples.append(example.example ?? "")
                 }
             }
-            else if meaning.partOfSpeech == "adjective" {
+            else if meaning.partOfSpeech == thirdParthOfSpeech {
                 for definition in definitions {
                     allAdjectivesDefinitions.append(definition.definition ?? "")
                 }
@@ -332,27 +350,27 @@ extension DetailPresenter: DetailPresenterProtocol {
 
     func nounButtonClicked() {
         view.showCancelButton()
-        removeFromClickedButtons("Noun")
-        if isFirstClicked { title += ", Noun" } else { title += "Noun"; isFirstClicked = true }
-        buttonArray.append("Noun")
+        removeFromClickedButtons(firstParthOfSpeech)
+        if isFirstClicked { title += ", \(firstParthOfSpeech)" } else { title += firstParthOfSpeech; isFirstClicked = true }
+        buttonArray.append(firstParthOfSpeech)
         view.hideSelectedButton()
         filtering(title)
     }
 
     func verbButtonClicked() {
         view.showCancelButton()
-        removeFromClickedButtons("Verb")
-        if isFirstClicked { title += ", Verb" } else { title += "Verb"; isFirstClicked = true }
-        buttonArray.append("Verb")
+        removeFromClickedButtons(secondParthOfSpeech)
+        if isFirstClicked { title += ", \(secondParthOfSpeech)" } else { title += secondParthOfSpeech; isFirstClicked = true }
+        buttonArray.append(secondParthOfSpeech)
         view.hideSelectedButton()
         filtering(title)
     }
 
     func adjectiveButtonClicked() {
         view.showCancelButton()
-        removeFromClickedButtons("Adjective")
-        if isFirstClicked { title += ", Adjective" } else { title += "Adjective"; isFirstClicked = true }
-        buttonArray.append("Adjective")
+        removeFromClickedButtons(thirdParthOfSpeech)
+        if isFirstClicked { title += ", \(thirdParthOfSpeech)" } else { title += thirdParthOfSpeech; isFirstClicked = true }
+        buttonArray.append(thirdParthOfSpeech)
         view.hideSelectedButton()
         filtering(title)
     }
