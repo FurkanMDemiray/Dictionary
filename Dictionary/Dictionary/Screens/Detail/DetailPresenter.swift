@@ -33,6 +33,7 @@ protocol DetailPresenterProtocol {
     func getDetailEntity() -> [DetailModel]
     func getSynonyms() -> [String]
     func synonmButtonClick(word: String)
+    func hideSoundButtonIfNoAudio()
 }
 
 
@@ -180,6 +181,23 @@ extension DetailPresenter {
 
 // MARK: - DetailPresenterProtocol
 extension DetailPresenter: DetailPresenterProtocol {
+
+    func hideSoundButtonIfNoAudio() {
+        let audios = word?.phonetics?.prefix(15).map { $0.audio }
+        guard let audios else { return }
+
+        var realAudio: String?
+        for audio in audios {
+            guard let audio else { return }
+            if audio.suffix(4) == ".mp3" {
+                audio != "" ? realAudio = audio: nil
+            }
+        }
+
+        if realAudio == "" || realAudio == nil {
+            view.hideSoundButton()
+        }
+    }
 
     var firstButtoName: String {
         firstParthOfSpeech

@@ -48,6 +48,7 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupConfigure()
+        presenter.hideSoundButtonIfNoAudio()
     }
 
 //MARK: - Configures
@@ -199,6 +200,10 @@ extension DetailViewController: DetailViewControllerProtocol {
     func setButtonNames(names: [String]) {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
+            if names[2] == "" && names[1] == "" {
+                self.verbButton.isHidden = true
+                self.adjectiveButton.isHidden = true
+            }
             self.nounButton.setTitle(names[0], for: .normal)
             self.verbButton.setTitle(names[1], for: .normal)
             self.adjectiveButton.setTitle(names[2], for: .normal)
