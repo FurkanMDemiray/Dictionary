@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Words
-struct Word: Decodable, Equatable {
+struct Word: Decodable {
     static func == (lhs: Word, rhs: Word) -> Bool {
         return lhs.word == rhs.word
     }

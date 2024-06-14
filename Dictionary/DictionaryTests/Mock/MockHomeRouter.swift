@@ -17,13 +17,13 @@ final class MockHomeRouter: HomeRouterProtocol {
     var synonyms: SynoymModel?
 
     func navigateToWordDetail(_ route: HomeRoutes) {
-        switch route {
+       /* switch route {
         case .detail(word: word, synonyms: synonyms):
             invokedNavigateToWordDetail = true
             invokedNavigateToWordDetailCount += 1
             invokedNavigateToWordDetailParameters = (route, ())
             return
-        }
+        }*/
     }
 
 }

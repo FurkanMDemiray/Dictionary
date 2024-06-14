@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - HomeViewControllerProtocol
 protocol HomeViewControllerProtocol: AnyObject {
-    func updateView()
+    func reloadTableView()
     func showError(error: Error)
     func adjustSearchButton(forKeyboardHeight height: CGFloat)
 }
@@ -28,6 +28,7 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setAccesiilityIdentifiers()
         presenter.viewDidLoad()
         setupFeatures()
     }
@@ -105,7 +106,7 @@ final class HomeViewController: UIViewController {
 // MARK: - HomeViewControllerProtocol
 extension HomeViewController: HomeViewControllerProtocol {
 
-    func updateView() {
+    func reloadTableView() {
         tableView.reloadData()
     }
 
@@ -167,6 +168,13 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                     }]
             )
         }
+    }
+}
+
+extension HomeViewController{
+    func setAccesiilityIdentifiers(){
+        searchBar.accessibilityIdentifier = "searchBar"
+        tableView.accessibilityIdentifier = "tableView"
     }
 }
 

@@ -20,7 +20,7 @@ final class MockHomeViewController: HomeViewControllerProtocol {
 
     var invokedAdjustSearchButton: (height: CGFloat, Void)?
 
-    func updateView() {
+    func reloadTableView() {
         isUpdateViewCalled = true
         updateViewCount += 1
     }

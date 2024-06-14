@@ -69,7 +69,7 @@ extension HomePresenter: HomePresenterProtocol {
         let userDefaults = UserDefaults.standard
         let key = "recentWords"
         userDefaults.set(recentWords, forKey: key)
-        view.updateView()
+        view.reloadTableView()
     }
 
     func saveRecentWord(word: String) {
@@ -89,11 +89,11 @@ extension HomePresenter: HomePresenterProtocol {
         }
 
         userDefaults.set(recentWords, forKey: key)
-        view.updateView()
+        view.reloadTableView()
     }
 
     func viewDidLoad() {
-        view.updateView()
+        view.reloadTableView()
     }
 
     func searchButtonTapped(word: String) {
