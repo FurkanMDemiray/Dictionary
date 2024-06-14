@@ -88,7 +88,7 @@ Also, make sure that these dependencies are added in your project's target:
 1. Click on a recent word or search for a word to view its details.
 
 <p align="left">
-  <img src="https://github.com/FurkanMDemiray/Dictionary/blob/main/Gifs/3.gif" alt="Listing" width="200" height="400">
+  <img src="https://github.com/FurkanMDemiray/Dictionary/blob/main/Gifs/2.gif" alt="Listing" width="200" height="400">
 </p>
 
 ## Filtering
@@ -96,7 +96,7 @@ Also, make sure that these dependencies are added in your project's target:
 1. You can filter word by its parth of speech.
 
 <p align="left">
-  <img src="https://github.com/FurkanMDemiray/Dictionary/blob/main/Gifs/4.gif" alt="Listing" width="200" height="400">
+  <img src="https://github.com/FurkanMDemiray/Dictionary/blob/main/Gifs/3.gif" alt="Listing" width="200" height="400">
 </p>
 
 ## Sound of Word
@@ -104,6 +104,6 @@ Also, make sure that these dependencies are added in your project's target:
 1. To listen to the pronunciation of the word, click the sound button on the detail screen.
 
 <p align="left">
-  <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/5.gif" alt="Listing" width="200" height="400">
+  <img src="https://github.com/FurkanMDemiray/Dictionary/blob/main/Gifs/5.gif" alt="Listing" width="200" height="400">
 </p>
 
