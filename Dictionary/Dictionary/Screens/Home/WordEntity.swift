@@ -8,7 +8,11 @@
 import Foundation
 
 // MARK: - Words
-struct Word: Decodable {
+struct Word: Decodable, Equatable {
+    static func == (lhs: Word, rhs: Word) -> Bool {
+        return lhs.word == rhs.word
+    }
+
     let word, phonetic: String?
     let phonetics: [Phonetic]?
     let meanings: [Meaning]?

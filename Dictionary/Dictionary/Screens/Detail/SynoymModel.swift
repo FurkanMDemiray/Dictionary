@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SynoymModel: Decodable {
+struct SynoymModel: Decodable, Equatable {
     let word: String?
     let score: Int?
 }
